@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="EstatusPaqueteCreatePage" lazy="true">
+        <pm:header title="#{db12017.CreateEstatusPaqueteTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:EstatusPaqueteListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="EstatusPaqueteCreateForm">
+
+                <h:panelGroup id="display" rendered="#{estatusPaqueteController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateEstatusPaqueteLabel_estatusPaquete}" for="estatusPaquete" />
+                            <p:inputText id="estatusPaquete" value="#{estatusPaqueteController.selected.estatusPaquete}" title="#{db12017.CreateEstatusPaqueteTitle_estatusPaquete}" required="true" requiredMessage="#{db12017.CreateEstatusPaqueteRequiredMessage_estatusPaquete}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateEstatusPaqueteLabel_descriEstatusPaquete}" for="descriEstatusPaquete" />
+                            <p:inputText id="descriEstatusPaquete" value="#{estatusPaqueteController.selected.descriEstatusPaquete}" title="#{db12017.CreateEstatusPaqueteTitle_descriEstatusPaquete}" required="true" requiredMessage="#{db12017.CreateEstatusPaqueteRequiredMessage_descriEstatusPaquete}" size="20" maxlength="20"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateEstatusPaqueteLabel_paqueteCodPaquete}" for="paqueteCodPaquete" />
+                            <p:selectOneMenu id="paqueteCodPaquete" value="#{estatusPaqueteController.selected.paqueteCodPaquete}" required="true" requiredMessage="#{db12017.CreateEstatusPaqueteRequiredMessage_paqueteCodPaquete}" converter="paqueteConverter">
+                                <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                                <f:selectItems value="#{paqueteController.items}"
+                                               var="paqueteCodPaqueteItem"
+                                               itemValue="#{paqueteCodPaqueteItem}"
+                                               itemLabel="#{paqueteCodPaqueteItem.codPaquete.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{estatusPaqueteController.saveNew}" value="#{db12017.Save}" update="display,:EstatusPaqueteListPage:EstatusPaqueteListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:EstatusPaqueteListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

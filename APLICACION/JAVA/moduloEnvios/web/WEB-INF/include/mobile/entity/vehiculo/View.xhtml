@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="VehiculoViewPage" lazy="true">
+        <pm:header title="#{db12017.ViewVehiculoTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:VehiculoListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="VehiculoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{vehiculoController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewVehiculoLabel_codVehiculo}"/>
+                            <h:outputText value="#{vehiculoController.selected.codVehiculo}" title="#{db12017.ViewVehiculoTitle_codVehiculo}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewVehiculoLabel_tipoVehiculo}"/>
+                            <h:outputText value="#{vehiculoController.selected.tipoVehiculo}" title="#{db12017.ViewVehiculoTitle_tipoVehiculo}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewVehiculoLabel_codPaquete}"/>
+                            <h:outputText value="#{vehiculoController.selected.codPaquete}" title="#{db12017.ViewVehiculoTitle_codPaquete}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewVehiculoLabel_codMensajero}"/>
+                            <h:outputText value="#{vehiculoController.selected.codMensajero}" title="#{db12017.ViewVehiculoTitle_codMensajero}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewVehiculoLabel_estatusVehiculo}"/>
+                            <h:outputText value="#{vehiculoController.selected.estatusVehiculo}" title="#{db12017.ViewVehiculoTitle_estatusVehiculo}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewVehiculoLabel_paqueteCodPaquete}"/>
+                            <h:outputText value="#{vehiculoController.selected.paqueteCodPaquete.codPaquete}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="VehiculoEditDlg" widgetVar="VehiculoEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.EditVehiculoTitle}" closeOnEscape="true">
+
+            <h:form id="VehiculoEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{vehiculoController.selected != null}">
+
+
+                        <h:outputLabel value="#{db12017.EditVehiculoLabel_codVehiculo}" for="codVehiculo" />
+                        <h:outputText id="codVehiculo" value="#{vehiculoController.selected.codVehiculo}" />
+
+                        <p:outputLabel value="#{db12017.EditVehiculoLabel_tipoVehiculo}" for="tipoVehiculo" />
+                        <p:inputText id="tipoVehiculo" value="#{vehiculoController.selected.tipoVehiculo}" title="#{db12017.EditVehiculoTitle_tipoVehiculo}" required="true" requiredMessage="#{db12017.EditVehiculoRequiredMessage_tipoVehiculo}"/>
+
+                        <p:outputLabel value="#{db12017.EditVehiculoLabel_codPaquete}" for="codPaquete" />
+                        <p:inputText id="codPaquete" value="#{vehiculoController.selected.codPaquete}" title="#{db12017.EditVehiculoTitle_codPaquete}" required="true" requiredMessage="#{db12017.EditVehiculoRequiredMessage_codPaquete}"/>
+
+                        <p:outputLabel value="#{db12017.EditVehiculoLabel_codMensajero}" for="codMensajero" />
+                        <p:inputText id="codMensajero" value="#{vehiculoController.selected.codMensajero}" title="#{db12017.EditVehiculoTitle_codMensajero}" required="true" requiredMessage="#{db12017.EditVehiculoRequiredMessage_codMensajero}"/>
+
+                        <p:outputLabel value="#{db12017.EditVehiculoLabel_estatusVehiculo}" for="estatusVehiculo" />
+                        <p:inputText id="estatusVehiculo" value="#{vehiculoController.selected.estatusVehiculo}" title="#{db12017.EditVehiculoTitle_estatusVehiculo}" required="true" requiredMessage="#{db12017.EditVehiculoRequiredMessage_estatusVehiculo}"/>
+
+                        <p:outputLabel value="#{db12017.EditVehiculoLabel_paqueteCodPaquete}" for="paqueteCodPaquete" />
+                        <p:selectOneMenu id="paqueteCodPaquete" value="#{vehiculoController.selected.paqueteCodPaquete}" required="true" requiredMessage="#{db12017.EditVehiculoRequiredMessage_paqueteCodPaquete}" converter="paqueteConverter">
+                            <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                            <f:selectItems value="#{paqueteController.items}"
+                                           var="paqueteCodPaqueteItem"
+                                           itemValue="#{paqueteCodPaqueteItem}"
+                                           itemLabel="#{paqueteCodPaqueteItem.codPaquete.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vehiculoController.save}" value="#{db12017.Save}" update="display,:VehiculoListForm:datalist,:VehiculoListForm:VehiculoDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('VehiculoEditDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('VehiculoEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

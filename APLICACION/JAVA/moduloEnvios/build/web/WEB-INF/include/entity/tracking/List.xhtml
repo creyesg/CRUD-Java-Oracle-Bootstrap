@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="TrackingListForm">
+
+        <p:panel header="#{db12017.ListTrackingTitle}">
+            <p:contextMenu id="TrackingDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{db12017.Create}" onclick="document.getElementById('TrackingListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{db12017.View}" onclick="document.getElementById('TrackingListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{db12017.Edit}" onclick="document.getElementById('TrackingListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{db12017.Delete}" onclick="document.getElementById('TrackingListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{db12017.TrackingMenuItem_paisEmpresaTrackingCollection}" icon="ui-icon-search"  action="#{trackingController.navigatePaisEmpresaTrackingCollection}" disabled="#{trackingController.isPaisEmpresaTrackingCollectionEmpty}" ajax="false"/>  
+                <p:menuitem value="#{db12017.TrackingMenuItem_estatusTrackingCollection}" icon="ui-icon-search"  action="#{trackingController.navigateEstatusTrackingCollection}" disabled="#{trackingController.isEstatusTrackingCollectionEmpty}" ajax="false"/>  
+                <p:menuitem value="#{db12017.TrackingMenuItem_envios}" icon="ui-icon-search"  actionListener="#{trackingController.prepareEnvios}" update=":EnviosViewForm" oncomplete="PF('EnviosViewDialog').show()" disabled="#{empty trackingController.selected.envios}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{trackingController.items}"
+                         lazy="false"
+                         rowKey="#{item.codTracking}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{trackingController.selected}"
+                         filteredValue="#{trackingController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{trackingController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.codTracking}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:TrackingDataTableContextMenu" listener="#{trackingController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:TrackingDataTableContextMenu" listener="#{trackingController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{trackingController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('TrackingListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.codTracking}" filterBy="#{item.codTracking}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListTrackingTitle_codTracking}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codTracking}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.codEmpresaTracking}" filterBy="#{item.codEmpresaTracking}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListTrackingTitle_codEmpresaTracking}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codEmpresaTracking}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.codPaisTracking}" filterBy="#{item.codPaisTracking}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListTrackingTitle_codPaisTracking}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codPaisTracking}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.codEstatusTracking}" filterBy="#{item.codEstatusTracking}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListTrackingTitle_codEstatusTracking}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codEstatusTracking}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.numeroHojaDespacho}" filterBy="#{item.numeroHojaDespacho}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListTrackingTitle_numeroHojaDespacho}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.numeroHojaDespacho}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.envios.descripcion}" filterBy="#{item.envios.descripcion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListTrackingTitle_envios}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.envios.descripcion}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{db12017.Create}" actionListener="#{trackingController.prepareCreate}" update=":TrackingCreateForm" oncomplete="PF('TrackingCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{db12017.View}" update=":TrackingViewForm" oncomplete="PF('TrackingViewDialog').show()" disabled="#{empty trackingController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{db12017.Edit}" update=":TrackingEditForm" oncomplete="PF('TrackingEditDialog').show()" disabled="#{empty trackingController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{db12017.Delete}" actionListener="#{trackingController.delete}" update=":growl,datalist" disabled="#{empty trackingController.selected}">
+                <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

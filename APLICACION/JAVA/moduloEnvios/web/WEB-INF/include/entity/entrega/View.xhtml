@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EntregaViewDlg" widgetVar="EntregaViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.ViewEntregaTitle}" closeOnEscape="true">
+
+            <h:form id="EntregaViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{entregaController.selected != null}">
+
+                        <h:outputText value="#{db12017.ViewEntregaLabel_codEntrega}"/>
+                        <h:outputText value="#{entregaController.selected.codEntrega}" title="#{db12017.ViewEntregaTitle_codEntrega}"/>
+
+                        <h:outputText value="#{db12017.ViewEntregaLabel_numeroHojaDespacho}"/>
+                        <h:outputText value="#{entregaController.selected.numeroHojaDespacho}" title="#{db12017.ViewEntregaTitle_numeroHojaDespacho}"/>
+
+                        <h:outputText value="#{db12017.ViewEntregaLabel_fechaEntrega}"/>
+                        <h:outputText value="#{entregaController.selected.fechaEntrega}" title="#{db12017.ViewEntregaTitle_fechaEntrega}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{db12017.ViewEntregaLabel_direccionEntrega}"/>
+                        <h:outputText value="#{entregaController.selected.direccionEntrega}" title="#{db12017.ViewEntregaTitle_direccionEntrega}"/>
+
+                        <h:outputText value="#{db12017.ViewEntregaLabel_nombreEntrega}"/>
+                        <h:outputText value="#{entregaController.selected.nombreEntrega}" title="#{db12017.ViewEntregaTitle_nombreEntrega}"/>
+
+                        <h:outputText value="#{db12017.ViewEntregaLabel_estatusEntrega}"/>
+                        <h:outputText value="#{entregaController.selected.estatusEntrega}" title="#{db12017.ViewEntregaTitle_estatusEntrega}"/>
+
+                        <h:outputText value="#{db12017.ViewEntregaLabel_usuarioEntrega}"/>
+                        <h:outputText value="#{entregaController.selected.usuarioEntrega}" title="#{db12017.ViewEntregaTitle_usuarioEntrega}"/>
+
+                        <h:outputText value="#{db12017.ViewEntregaLabel_envios}"/>
+                        <h:outputText value="#{entregaController.selected.envios.descripcion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{db12017.Close}" onclick="PF('EntregaViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

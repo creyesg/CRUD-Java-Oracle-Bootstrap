@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VehiculoCreateDlg" widgetVar="VehiculoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{db12017.CreateVehiculoTitle}" closeOnEscape="true">
+
+            <h:form id="VehiculoCreateForm">
+
+                <h:panelGroup id="display" rendered="#{vehiculoController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{db12017.CreateVehiculoLabel_codVehiculo}" for="codVehiculo" />
+                        <p:inputText id="codVehiculo" value="#{vehiculoController.selected.codVehiculo}" title="#{db12017.CreateVehiculoTitle_codVehiculo}" required="true" requiredMessage="#{db12017.CreateVehiculoRequiredMessage_codVehiculo}"/>
+
+                        <p:outputLabel value="#{db12017.CreateVehiculoLabel_tipoVehiculo}" for="tipoVehiculo" />
+                        <p:inputText id="tipoVehiculo" value="#{vehiculoController.selected.tipoVehiculo}" title="#{db12017.CreateVehiculoTitle_tipoVehiculo}" required="true" requiredMessage="#{db12017.CreateVehiculoRequiredMessage_tipoVehiculo}"/>
+
+                        <p:outputLabel value="#{db12017.CreateVehiculoLabel_codPaquete}" for="codPaquete" />
+                        <p:inputText id="codPaquete" value="#{vehiculoController.selected.codPaquete}" title="#{db12017.CreateVehiculoTitle_codPaquete}" required="true" requiredMessage="#{db12017.CreateVehiculoRequiredMessage_codPaquete}"/>
+
+                        <p:outputLabel value="#{db12017.CreateVehiculoLabel_codMensajero}" for="codMensajero" />
+                        <p:inputText id="codMensajero" value="#{vehiculoController.selected.codMensajero}" title="#{db12017.CreateVehiculoTitle_codMensajero}" required="true" requiredMessage="#{db12017.CreateVehiculoRequiredMessage_codMensajero}"/>
+
+                        <p:outputLabel value="#{db12017.CreateVehiculoLabel_estatusVehiculo}" for="estatusVehiculo" />
+                        <p:inputText id="estatusVehiculo" value="#{vehiculoController.selected.estatusVehiculo}" title="#{db12017.CreateVehiculoTitle_estatusVehiculo}" required="true" requiredMessage="#{db12017.CreateVehiculoRequiredMessage_estatusVehiculo}"/>
+
+                        <p:outputLabel value="#{db12017.CreateVehiculoLabel_paqueteCodPaquete}" for="paqueteCodPaquete" />
+                        <p:selectOneMenu id="paqueteCodPaquete" value="#{vehiculoController.selected.paqueteCodPaquete}" required="true" requiredMessage="#{db12017.CreateVehiculoRequiredMessage_paqueteCodPaquete}" converter="paqueteConverter">
+                            <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                            <f:selectItems value="#{paqueteController.items}"
+                                           var="paqueteCodPaqueteItem"
+                                           itemValue="#{paqueteCodPaqueteItem}"
+                                           itemLabel="#{paqueteCodPaqueteItem.codPaquete.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vehiculoController.saveNew}" value="#{db12017.Save}" update="display,:VehiculoListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('VehiculoCreateDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('VehiculoCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

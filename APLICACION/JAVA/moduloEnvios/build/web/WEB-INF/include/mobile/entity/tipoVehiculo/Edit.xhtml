@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="TipoVehiculoEditPage" lazy="true">
+        <pm:header title="#{db12017.EditTipoVehiculoTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:TipoVehiculoListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="TipoVehiculoEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{tipoVehiculoController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{db12017.EditTipoVehiculoLabel_tipoVehiculo}" for="tipoVehiculo" />
+                            <h:outputText id="tipoVehiculo" value="#{tipoVehiculoController.selected.tipoVehiculo}" />
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditTipoVehiculoLabel_descriTipoVehiculo}" for="descriTipoVehiculo" />
+                            <p:inputText id="descriTipoVehiculo" value="#{tipoVehiculoController.selected.descriTipoVehiculo}" title="#{db12017.EditTipoVehiculoTitle_descriTipoVehiculo}" required="true" requiredMessage="#{db12017.EditTipoVehiculoRequiredMessage_descriTipoVehiculo}" size="100" maxlength="100"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditTipoVehiculoLabel_vehiculoCodVehiculo}" for="vehiculoCodVehiculo" />
+                            <p:selectOneMenu id="vehiculoCodVehiculo" value="#{tipoVehiculoController.selected.vehiculoCodVehiculo}" required="true" requiredMessage="#{db12017.EditTipoVehiculoRequiredMessage_vehiculoCodVehiculo}" converter="vehiculoConverter">
+                                <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                                <f:selectItems value="#{vehiculoController.items}"
+                                               var="vehiculoCodVehiculoItem"
+                                               itemValue="#{vehiculoCodVehiculoItem}"
+                                               itemLabel="#{vehiculoCodVehiculoItem.codVehiculo.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{tipoVehiculoController.save}" value="#{db12017.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:TipoVehiculoListPage:TipoVehiculoListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:TipoVehiculoListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

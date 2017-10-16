@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstatusVehiculoCreateDlg" widgetVar="EstatusVehiculoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{db12017.CreateEstatusVehiculoTitle}" closeOnEscape="true">
+
+            <h:form id="EstatusVehiculoCreateForm">
+
+                <h:panelGroup id="display" rendered="#{estatusVehiculoController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{db12017.CreateEstatusVehiculoLabel_estatusVehiculo}" for="estatusVehiculo" />
+                        <p:inputText id="estatusVehiculo" value="#{estatusVehiculoController.selected.estatusVehiculo}" title="#{db12017.CreateEstatusVehiculoTitle_estatusVehiculo}" required="true" requiredMessage="#{db12017.CreateEstatusVehiculoRequiredMessage_estatusVehiculo}"/>
+
+                        <p:outputLabel value="#{db12017.CreateEstatusVehiculoLabel_descriEstatusVehiculo}" for="descriEstatusVehiculo" />
+                        <p:inputText id="descriEstatusVehiculo" value="#{estatusVehiculoController.selected.descriEstatusVehiculo}" title="#{db12017.CreateEstatusVehiculoTitle_descriEstatusVehiculo}" required="true" requiredMessage="#{db12017.CreateEstatusVehiculoRequiredMessage_descriEstatusVehiculo}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{db12017.CreateEstatusVehiculoLabel_vehiculoCodVehiculo}" for="vehiculoCodVehiculo" />
+                        <p:selectOneMenu id="vehiculoCodVehiculo" value="#{estatusVehiculoController.selected.vehiculoCodVehiculo}" required="true" requiredMessage="#{db12017.CreateEstatusVehiculoRequiredMessage_vehiculoCodVehiculo}" converter="vehiculoConverter">
+                            <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                            <f:selectItems value="#{vehiculoController.items}"
+                                           var="vehiculoCodVehiculoItem"
+                                           itemValue="#{vehiculoCodVehiculoItem}"
+                                           itemLabel="#{vehiculoCodVehiculoItem.codVehiculo.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estatusVehiculoController.saveNew}" value="#{db12017.Save}" update="display,:EstatusVehiculoListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EstatusVehiculoCreateDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('EstatusVehiculoCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

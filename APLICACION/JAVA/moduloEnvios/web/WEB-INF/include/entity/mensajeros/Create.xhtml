@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MensajerosCreateDlg" widgetVar="MensajerosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{db12017.CreateMensajerosTitle}" closeOnEscape="true">
+
+            <h:form id="MensajerosCreateForm">
+
+                <h:panelGroup id="display" rendered="#{mensajerosController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{db12017.CreateMensajerosLabel_codMensajero}" for="codMensajero" />
+                        <p:inputText id="codMensajero" value="#{mensajerosController.selected.codMensajero}" title="#{db12017.CreateMensajerosTitle_codMensajero}" required="true" requiredMessage="#{db12017.CreateMensajerosRequiredMessage_codMensajero}"/>
+
+                        <p:outputLabel value="#{db12017.CreateMensajerosLabel_primerNombreMensajero}" for="primerNombreMensajero" />
+                        <p:inputText id="primerNombreMensajero" value="#{mensajerosController.selected.primerNombreMensajero}" title="#{db12017.CreateMensajerosTitle_primerNombreMensajero}" required="true" requiredMessage="#{db12017.CreateMensajerosRequiredMessage_primerNombreMensajero}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{db12017.CreateMensajerosLabel_segundoNombreMensajero}" for="segundoNombreMensajero" />
+                        <p:inputText id="segundoNombreMensajero" value="#{mensajerosController.selected.segundoNombreMensajero}" title="#{db12017.CreateMensajerosTitle_segundoNombreMensajero}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{db12017.CreateMensajerosLabel_primerApellidoMensajero}" for="primerApellidoMensajero" />
+                        <p:inputText id="primerApellidoMensajero" value="#{mensajerosController.selected.primerApellidoMensajero}" title="#{db12017.CreateMensajerosTitle_primerApellidoMensajero}" required="true" requiredMessage="#{db12017.CreateMensajerosRequiredMessage_primerApellidoMensajero}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{db12017.CreateMensajerosLabel_segundoApellidoMensajero}" for="segundoApellidoMensajero" />
+                        <p:inputText id="segundoApellidoMensajero" value="#{mensajerosController.selected.segundoApellidoMensajero}" title="#{db12017.CreateMensajerosTitle_segundoApellidoMensajero}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{db12017.CreateMensajerosLabel_estatusMensajero}" for="estatusMensajero" />
+                        <p:inputText id="estatusMensajero" value="#{mensajerosController.selected.estatusMensajero}" title="#{db12017.CreateMensajerosTitle_estatusMensajero}" required="true" requiredMessage="#{db12017.CreateMensajerosRequiredMessage_estatusMensajero}"/>
+
+                        <p:outputLabel value="#{db12017.CreateMensajerosLabel_vehiculoCodVehiculo}" for="vehiculoCodVehiculo" />
+                        <p:selectOneMenu id="vehiculoCodVehiculo" value="#{mensajerosController.selected.vehiculoCodVehiculo}" required="true" requiredMessage="#{db12017.CreateMensajerosRequiredMessage_vehiculoCodVehiculo}" converter="vehiculoConverter">
+                            <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                            <f:selectItems value="#{vehiculoController.items}"
+                                           var="vehiculoCodVehiculoItem"
+                                           itemValue="#{vehiculoCodVehiculoItem}"
+                                           itemLabel="#{vehiculoCodVehiculoItem.codVehiculo.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{mensajerosController.saveNew}" value="#{db12017.Save}" update="display,:MensajerosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('MensajerosCreateDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('MensajerosCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

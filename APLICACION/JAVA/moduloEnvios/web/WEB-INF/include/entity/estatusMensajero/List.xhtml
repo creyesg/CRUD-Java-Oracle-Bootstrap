@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="EstatusMensajeroListForm">
+
+        <p:panel header="#{db12017.ListEstatusMensajeroTitle}">
+            <p:contextMenu id="EstatusMensajeroDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{db12017.Create}" onclick="document.getElementById('EstatusMensajeroListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{db12017.View}" onclick="document.getElementById('EstatusMensajeroListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{db12017.Edit}" onclick="document.getElementById('EstatusMensajeroListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{db12017.Delete}" onclick="document.getElementById('EstatusMensajeroListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{db12017.EstatusMensajeroMenuItem_mensajerosCodMensajero}" icon="ui-icon-search"  actionListener="#{estatusMensajeroController.prepareMensajerosCodMensajero}" update=":MensajerosViewForm" oncomplete="PF('MensajerosViewDialog').show()" disabled="#{empty estatusMensajeroController.selected.mensajerosCodMensajero}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{estatusMensajeroController.items}"
+                         lazy="false"
+                         rowKey="#{item.estatusMensajero}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{estatusMensajeroController.selected}"
+                         filteredValue="#{estatusMensajeroController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{estatusMensajeroController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.estatusMensajero}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:EstatusMensajeroDataTableContextMenu" listener="#{estatusMensajeroController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:EstatusMensajeroDataTableContextMenu" listener="#{estatusMensajeroController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{estatusMensajeroController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('EstatusMensajeroListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.estatusMensajero}" filterBy="#{item.estatusMensajero}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListEstatusMensajeroTitle_estatusMensajero}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.estatusMensajero}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.descriEstatusMensajero}" filterBy="#{item.descriEstatusMensajero}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListEstatusMensajeroTitle_descriEstatusMensajero}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.descriEstatusMensajero}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.mensajerosCodMensajero.codMensajero}" filterBy="#{item.mensajerosCodMensajero.codMensajero}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListEstatusMensajeroTitle_mensajerosCodMensajero}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.mensajerosCodMensajero.codMensajero}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{db12017.Create}" actionListener="#{estatusMensajeroController.prepareCreate}" update=":EstatusMensajeroCreateForm" oncomplete="PF('EstatusMensajeroCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{db12017.View}" update=":EstatusMensajeroViewForm" oncomplete="PF('EstatusMensajeroViewDialog').show()" disabled="#{empty estatusMensajeroController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{db12017.Edit}" update=":EstatusMensajeroEditForm" oncomplete="PF('EstatusMensajeroEditDialog').show()" disabled="#{empty estatusMensajeroController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{db12017.Delete}" actionListener="#{estatusMensajeroController.delete}" update=":growl,datalist" disabled="#{empty estatusMensajeroController.selected}">
+                <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

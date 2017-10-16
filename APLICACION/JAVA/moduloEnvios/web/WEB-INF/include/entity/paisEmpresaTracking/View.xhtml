@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PaisEmpresaTrackingViewDlg" widgetVar="PaisEmpresaTrackingViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.ViewPaisEmpresaTrackingTitle}" closeOnEscape="true">
+
+            <h:form id="PaisEmpresaTrackingViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{paisEmpresaTrackingController.selected != null}">
+
+                        <h:outputText value="#{db12017.ViewPaisEmpresaTrackingLabel_codPaisTracking}"/>
+                        <h:outputText value="#{paisEmpresaTrackingController.selected.codPaisTracking}" title="#{db12017.ViewPaisEmpresaTrackingTitle_codPaisTracking}"/>
+
+                        <h:outputText value="#{db12017.ViewPaisEmpresaTrackingLabel_descripcionPais}"/>
+                        <h:outputText value="#{paisEmpresaTrackingController.selected.descripcionPais}" title="#{db12017.ViewPaisEmpresaTrackingTitle_descripcionPais}"/>
+
+                        <h:outputText value="#{db12017.ViewPaisEmpresaTrackingLabel_trackingCodTracking}"/>
+                        <h:outputText value="#{paisEmpresaTrackingController.selected.trackingCodTracking.codTracking}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{db12017.Close}" onclick="PF('PaisEmpresaTrackingViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="EnviosViewPage" lazy="true">
+        <pm:header title="#{db12017.ViewEnviosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:EnviosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="EnviosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{enviosController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewEnviosLabel_enviosPK_numeroHojaDespacho}"/>
+                            <h:outputText value="#{enviosController.selected.enviosPK.numeroHojaDespacho}" title="#{db12017.ViewEnviosTitle_enviosPK_numeroHojaDespacho}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewEnviosLabel_enviosPK_codEntrega}"/>
+                            <h:outputText value="#{enviosController.selected.enviosPK.codEntrega}" title="#{db12017.ViewEnviosTitle_enviosPK_codEntrega}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewEnviosLabel_fechaEnvio}"/>
+                            <h:outputText value="#{enviosController.selected.fechaEnvio}" title="#{db12017.ViewEnviosTitle_fechaEnvio}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewEnviosLabel_idUnidad}"/>
+                            <h:outputText value="#{enviosController.selected.idUnidad}" title="#{db12017.ViewEnviosTitle_idUnidad}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewEnviosLabel_codTracking}"/>
+                            <h:outputText value="#{enviosController.selected.codTracking}" title="#{db12017.ViewEnviosTitle_codTracking}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewEnviosLabel_descripcion}"/>
+                            <h:outputText value="#{enviosController.selected.descripcion}" title="#{db12017.ViewEnviosTitle_descripcion}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewEnviosLabel_usuarioEnvio}"/>
+                            <h:outputText value="#{enviosController.selected.usuarioEnvio}" title="#{db12017.ViewEnviosTitle_usuarioEnvio}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewEnviosLabel_codPaquete}"/>
+                            <h:outputText value="#{enviosController.selected.codPaquete}" title="#{db12017.ViewEnviosTitle_codPaquete}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewEnviosLabel_nombreEnvia}"/>
+                            <h:outputText value="#{enviosController.selected.nombreEnvia}" title="#{db12017.ViewEnviosTitle_nombreEnvia}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewEnviosLabel_despachoCodDespacho}"/>
+                            <h:outputText value="#{enviosController.selected.despachoCodDespacho.codDespacho}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

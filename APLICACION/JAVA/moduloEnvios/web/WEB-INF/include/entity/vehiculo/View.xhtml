@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VehiculoViewDlg" widgetVar="VehiculoViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.ViewVehiculoTitle}" closeOnEscape="true">
+
+            <h:form id="VehiculoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{vehiculoController.selected != null}">
+
+                        <h:outputText value="#{db12017.ViewVehiculoLabel_codVehiculo}"/>
+                        <h:outputText value="#{vehiculoController.selected.codVehiculo}" title="#{db12017.ViewVehiculoTitle_codVehiculo}"/>
+
+                        <h:outputText value="#{db12017.ViewVehiculoLabel_tipoVehiculo}"/>
+                        <h:outputText value="#{vehiculoController.selected.tipoVehiculo}" title="#{db12017.ViewVehiculoTitle_tipoVehiculo}"/>
+
+                        <h:outputText value="#{db12017.ViewVehiculoLabel_codPaquete}"/>
+                        <h:outputText value="#{vehiculoController.selected.codPaquete}" title="#{db12017.ViewVehiculoTitle_codPaquete}"/>
+
+                        <h:outputText value="#{db12017.ViewVehiculoLabel_codMensajero}"/>
+                        <h:outputText value="#{vehiculoController.selected.codMensajero}" title="#{db12017.ViewVehiculoTitle_codMensajero}"/>
+
+                        <h:outputText value="#{db12017.ViewVehiculoLabel_estatusVehiculo}"/>
+                        <h:outputText value="#{vehiculoController.selected.estatusVehiculo}" title="#{db12017.ViewVehiculoTitle_estatusVehiculo}"/>
+
+                        <h:outputText value="#{db12017.ViewVehiculoLabel_paqueteCodPaquete}"/>
+                        <h:outputText value="#{vehiculoController.selected.paqueteCodPaquete.codPaquete}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{db12017.Close}" onclick="PF('VehiculoViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

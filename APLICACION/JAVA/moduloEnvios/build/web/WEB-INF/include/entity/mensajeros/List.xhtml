@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="MensajerosListForm">
+
+        <p:panel header="#{db12017.ListMensajerosTitle}">
+            <p:contextMenu id="MensajerosDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{db12017.Create}" onclick="document.getElementById('MensajerosListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{db12017.View}" onclick="document.getElementById('MensajerosListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{db12017.Edit}" onclick="document.getElementById('MensajerosListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{db12017.Delete}" onclick="document.getElementById('MensajerosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{db12017.MensajerosMenuItem_estatusMensajeroCollection}" icon="ui-icon-search"  action="#{mensajerosController.navigateEstatusMensajeroCollection}" disabled="#{mensajerosController.isEstatusMensajeroCollectionEmpty}" ajax="false"/>  
+                <p:menuitem value="#{db12017.MensajerosMenuItem_vehiculoCodVehiculo}" icon="ui-icon-search"  actionListener="#{mensajerosController.prepareVehiculoCodVehiculo}" update=":VehiculoViewForm" oncomplete="PF('VehiculoViewDialog').show()" disabled="#{empty mensajerosController.selected.vehiculoCodVehiculo}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{mensajerosController.items}"
+                         lazy="false"
+                         rowKey="#{item.codMensajero}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{mensajerosController.selected}"
+                         filteredValue="#{mensajerosController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{mensajerosController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.codMensajero}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:MensajerosDataTableContextMenu" listener="#{mensajerosController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:MensajerosDataTableContextMenu" listener="#{mensajerosController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{mensajerosController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('MensajerosListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.codMensajero}" filterBy="#{item.codMensajero}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListMensajerosTitle_codMensajero}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codMensajero}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.primerNombreMensajero}" filterBy="#{item.primerNombreMensajero}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListMensajerosTitle_primerNombreMensajero}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.primerNombreMensajero}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.segundoNombreMensajero}" filterBy="#{item.segundoNombreMensajero}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListMensajerosTitle_segundoNombreMensajero}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.segundoNombreMensajero}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.primerApellidoMensajero}" filterBy="#{item.primerApellidoMensajero}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListMensajerosTitle_primerApellidoMensajero}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.primerApellidoMensajero}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.segundoApellidoMensajero}" filterBy="#{item.segundoApellidoMensajero}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListMensajerosTitle_segundoApellidoMensajero}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.segundoApellidoMensajero}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.estatusMensajero}" filterBy="#{item.estatusMensajero}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListMensajerosTitle_estatusMensajero}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.estatusMensajero}"/>
+                </p:column>
+
+                <ui:remove>
+                    <p:column sortBy="#{item.vehiculoCodVehiculo.codVehiculo}" filterBy="#{item.vehiculoCodVehiculo.codVehiculo}">
+                        <f:facet name="header">
+                            <h:outputText value="#{db12017.ListMensajerosTitle_vehiculoCodVehiculo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.vehiculoCodVehiculo.codVehiculo}"/>
+                    </p:column>
+                </ui:remove>
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{db12017.Create}" actionListener="#{mensajerosController.prepareCreate}" update=":MensajerosCreateForm" oncomplete="PF('MensajerosCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{db12017.View}" update=":MensajerosViewForm" oncomplete="PF('MensajerosViewDialog').show()" disabled="#{empty mensajerosController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{db12017.Edit}" update=":MensajerosEditForm" oncomplete="PF('MensajerosEditDialog').show()" disabled="#{empty mensajerosController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{db12017.Delete}" actionListener="#{mensajerosController.delete}" update=":growl,datalist" disabled="#{empty mensajerosController.selected}">
+                <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

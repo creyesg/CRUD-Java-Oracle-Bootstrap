@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="EstatusTrackingCreatePage" lazy="true">
+        <pm:header title="#{db12017.CreateEstatusTrackingTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:EstatusTrackingListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="EstatusTrackingCreateForm">
+
+                <h:panelGroup id="display" rendered="#{estatusTrackingController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateEstatusTrackingLabel_codEstatusTracking}" for="codEstatusTracking" />
+                            <p:inputText id="codEstatusTracking" value="#{estatusTrackingController.selected.codEstatusTracking}" title="#{db12017.CreateEstatusTrackingTitle_codEstatusTracking}" required="true" requiredMessage="#{db12017.CreateEstatusTrackingRequiredMessage_codEstatusTracking}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateEstatusTrackingLabel_descriEstatusTracking}" for="descriEstatusTracking" />
+                            <p:inputText id="descriEstatusTracking" value="#{estatusTrackingController.selected.descriEstatusTracking}" title="#{db12017.CreateEstatusTrackingTitle_descriEstatusTracking}" required="true" requiredMessage="#{db12017.CreateEstatusTrackingRequiredMessage_descriEstatusTracking}" size="10" maxlength="10"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateEstatusTrackingLabel_trackingCodTracking}" for="trackingCodTracking" />
+                            <p:selectOneMenu id="trackingCodTracking" value="#{estatusTrackingController.selected.trackingCodTracking}" required="true" requiredMessage="#{db12017.CreateEstatusTrackingRequiredMessage_trackingCodTracking}" converter="trackingConverter">
+                                <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                                <f:selectItems value="#{trackingController.items}"
+                                               var="trackingCodTrackingItem"
+                                               itemValue="#{trackingCodTrackingItem}"
+                                               itemLabel="#{trackingCodTrackingItem.codTracking.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{estatusTrackingController.saveNew}" value="#{db12017.Save}" update="display,:EstatusTrackingListPage:EstatusTrackingListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:EstatusTrackingListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

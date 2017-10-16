@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="TrackingEditPage" lazy="true">
+        <pm:header title="#{db12017.EditTrackingTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:TrackingListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="TrackingEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{trackingController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{db12017.EditTrackingLabel_codTracking}" for="codTracking" />
+                            <h:outputText id="codTracking" value="#{trackingController.selected.codTracking}" />
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditTrackingLabel_codEmpresaTracking}" for="codEmpresaTracking" />
+                            <p:inputText id="codEmpresaTracking" value="#{trackingController.selected.codEmpresaTracking}" title="#{db12017.EditTrackingTitle_codEmpresaTracking}" required="true" requiredMessage="#{db12017.EditTrackingRequiredMessage_codEmpresaTracking}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditTrackingLabel_codPaisTracking}" for="codPaisTracking" />
+                            <p:inputText id="codPaisTracking" value="#{trackingController.selected.codPaisTracking}" title="#{db12017.EditTrackingTitle_codPaisTracking}" required="true" requiredMessage="#{db12017.EditTrackingRequiredMessage_codPaisTracking}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditTrackingLabel_codEstatusTracking}" for="codEstatusTracking" />
+                            <p:inputText id="codEstatusTracking" value="#{trackingController.selected.codEstatusTracking}" title="#{db12017.EditTrackingTitle_codEstatusTracking}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditTrackingLabel_numeroHojaDespacho}" for="numeroHojaDespacho" />
+                            <p:inputText id="numeroHojaDespacho" value="#{trackingController.selected.numeroHojaDespacho}" title="#{db12017.EditTrackingTitle_numeroHojaDespacho}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditTrackingLabel_envios}" for="envios" />
+                            <p:selectOneMenu id="envios" value="#{trackingController.selected.envios}" required="true" requiredMessage="#{db12017.EditTrackingRequiredMessage_envios}" converter="enviosConverter">
+                                <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                                <f:selectItems value="#{enviosController.items}"
+                                               var="enviosItem"
+                                               itemValue="#{enviosItem}"
+                                               itemLabel="#{enviosItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{trackingController.save}" value="#{db12017.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:TrackingListPage:TrackingListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:TrackingListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

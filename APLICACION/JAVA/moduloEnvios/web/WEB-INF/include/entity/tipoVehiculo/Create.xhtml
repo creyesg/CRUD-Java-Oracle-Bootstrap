@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoVehiculoCreateDlg" widgetVar="TipoVehiculoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{db12017.CreateTipoVehiculoTitle}" closeOnEscape="true">
+
+            <h:form id="TipoVehiculoCreateForm">
+
+                <h:panelGroup id="display" rendered="#{tipoVehiculoController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{db12017.CreateTipoVehiculoLabel_tipoVehiculo}" for="tipoVehiculo" />
+                        <p:inputText id="tipoVehiculo" value="#{tipoVehiculoController.selected.tipoVehiculo}" title="#{db12017.CreateTipoVehiculoTitle_tipoVehiculo}" required="true" requiredMessage="#{db12017.CreateTipoVehiculoRequiredMessage_tipoVehiculo}"/>
+
+                        <p:outputLabel value="#{db12017.CreateTipoVehiculoLabel_descriTipoVehiculo}" for="descriTipoVehiculo" />
+                        <p:inputText id="descriTipoVehiculo" value="#{tipoVehiculoController.selected.descriTipoVehiculo}" title="#{db12017.CreateTipoVehiculoTitle_descriTipoVehiculo}" required="true" requiredMessage="#{db12017.CreateTipoVehiculoRequiredMessage_descriTipoVehiculo}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{db12017.CreateTipoVehiculoLabel_vehiculoCodVehiculo}" for="vehiculoCodVehiculo" />
+                        <p:selectOneMenu id="vehiculoCodVehiculo" value="#{tipoVehiculoController.selected.vehiculoCodVehiculo}" required="true" requiredMessage="#{db12017.CreateTipoVehiculoRequiredMessage_vehiculoCodVehiculo}" converter="vehiculoConverter">
+                            <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                            <f:selectItems value="#{vehiculoController.items}"
+                                           var="vehiculoCodVehiculoItem"
+                                           itemValue="#{vehiculoCodVehiculoItem}"
+                                           itemLabel="#{vehiculoCodVehiculoItem.codVehiculo.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoVehiculoController.saveNew}" value="#{db12017.Save}" update="display,:TipoVehiculoListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('TipoVehiculoCreateDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('TipoVehiculoCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstatusEntregaViewDlg" widgetVar="EstatusEntregaViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.ViewEstatusEntregaTitle}" closeOnEscape="true">
+
+            <h:form id="EstatusEntregaViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{estatusEntregaController.selected != null}">
+
+                        <h:outputText value="#{db12017.ViewEstatusEntregaLabel_estatusEntrega}"/>
+                        <h:outputText value="#{estatusEntregaController.selected.estatusEntrega}" title="#{db12017.ViewEstatusEntregaTitle_estatusEntrega}"/>
+
+                        <h:outputText value="#{db12017.ViewEstatusEntregaLabel_descriEstatusEntrega}"/>
+                        <h:outputText value="#{estatusEntregaController.selected.descriEstatusEntrega}" title="#{db12017.ViewEstatusEntregaTitle_descriEstatusEntrega}"/>
+
+                        <h:outputText value="#{db12017.ViewEstatusEntregaLabel_entregaCodEntrega}"/>
+                        <h:outputText value="#{estatusEntregaController.selected.entregaCodEntrega.codEntrega}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{db12017.Close}" onclick="PF('EstatusEntregaViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

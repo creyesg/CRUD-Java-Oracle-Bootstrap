@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PaisEmpresaTrackingCreateDlg" widgetVar="PaisEmpresaTrackingCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{db12017.CreatePaisEmpresaTrackingTitle}" closeOnEscape="true">
+
+            <h:form id="PaisEmpresaTrackingCreateForm">
+
+                <h:panelGroup id="display" rendered="#{paisEmpresaTrackingController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{db12017.CreatePaisEmpresaTrackingLabel_codPaisTracking}" for="codPaisTracking" />
+                        <p:inputText id="codPaisTracking" value="#{paisEmpresaTrackingController.selected.codPaisTracking}" title="#{db12017.CreatePaisEmpresaTrackingTitle_codPaisTracking}" required="true" requiredMessage="#{db12017.CreatePaisEmpresaTrackingRequiredMessage_codPaisTracking}"/>
+
+                        <p:outputLabel value="#{db12017.CreatePaisEmpresaTrackingLabel_descripcionPais}" for="descripcionPais" />
+                        <p:inputText id="descripcionPais" value="#{paisEmpresaTrackingController.selected.descripcionPais}" title="#{db12017.CreatePaisEmpresaTrackingTitle_descripcionPais}" size="200" maxlength="200"/>
+
+                        <p:outputLabel value="#{db12017.CreatePaisEmpresaTrackingLabel_trackingCodTracking}" for="trackingCodTracking" />
+                        <p:selectOneMenu id="trackingCodTracking" value="#{paisEmpresaTrackingController.selected.trackingCodTracking}" required="true" requiredMessage="#{db12017.CreatePaisEmpresaTrackingRequiredMessage_trackingCodTracking}" converter="trackingConverter">
+                            <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                            <f:selectItems value="#{trackingController.items}"
+                                           var="trackingCodTrackingItem"
+                                           itemValue="#{trackingCodTrackingItem}"
+                                           itemLabel="#{trackingCodTrackingItem.codTracking.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{paisEmpresaTrackingController.saveNew}" value="#{db12017.Save}" update="display,:PaisEmpresaTrackingListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('PaisEmpresaTrackingCreateDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('PaisEmpresaTrackingCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

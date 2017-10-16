@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstatusPaqueteViewDlg" widgetVar="EstatusPaqueteViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.ViewEstatusPaqueteTitle}" closeOnEscape="true">
+
+            <h:form id="EstatusPaqueteViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{estatusPaqueteController.selected != null}">
+
+                        <h:outputText value="#{db12017.ViewEstatusPaqueteLabel_estatusPaquete}"/>
+                        <h:outputText value="#{estatusPaqueteController.selected.estatusPaquete}" title="#{db12017.ViewEstatusPaqueteTitle_estatusPaquete}"/>
+
+                        <h:outputText value="#{db12017.ViewEstatusPaqueteLabel_descriEstatusPaquete}"/>
+                        <h:outputText value="#{estatusPaqueteController.selected.descriEstatusPaquete}" title="#{db12017.ViewEstatusPaqueteTitle_descriEstatusPaquete}"/>
+
+                        <h:outputText value="#{db12017.ViewEstatusPaqueteLabel_paqueteCodPaquete}"/>
+                        <h:outputText value="#{estatusPaqueteController.selected.paqueteCodPaquete.codPaquete}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{db12017.Close}" onclick="PF('EstatusPaqueteViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

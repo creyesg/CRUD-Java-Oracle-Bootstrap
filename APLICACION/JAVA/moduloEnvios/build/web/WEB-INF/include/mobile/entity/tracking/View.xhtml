@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="TrackingViewPage" lazy="true">
+        <pm:header title="#{db12017.ViewTrackingTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:TrackingListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="TrackingViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{trackingController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewTrackingLabel_codTracking}"/>
+                            <h:outputText value="#{trackingController.selected.codTracking}" title="#{db12017.ViewTrackingTitle_codTracking}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewTrackingLabel_codEmpresaTracking}"/>
+                            <h:outputText value="#{trackingController.selected.codEmpresaTracking}" title="#{db12017.ViewTrackingTitle_codEmpresaTracking}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewTrackingLabel_codPaisTracking}"/>
+                            <h:outputText value="#{trackingController.selected.codPaisTracking}" title="#{db12017.ViewTrackingTitle_codPaisTracking}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewTrackingLabel_codEstatusTracking}"/>
+                            <h:outputText value="#{trackingController.selected.codEstatusTracking}" title="#{db12017.ViewTrackingTitle_codEstatusTracking}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewTrackingLabel_numeroHojaDespacho}"/>
+                            <h:outputText value="#{trackingController.selected.numeroHojaDespacho}" title="#{db12017.ViewTrackingTitle_numeroHojaDespacho}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewTrackingLabel_envios}"/>
+                            <h:outputText value="#{trackingController.selected.envios.descripcion}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

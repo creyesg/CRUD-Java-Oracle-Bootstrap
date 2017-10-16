@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="DespachoListForm">
+
+        <p:panel header="#{db12017.ListDespachoTitle}">
+            <p:contextMenu id="DespachoDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{db12017.Create}" onclick="document.getElementById('DespachoListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{db12017.View}" onclick="document.getElementById('DespachoListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{db12017.Edit}" onclick="document.getElementById('DespachoListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{db12017.Delete}" onclick="document.getElementById('DespachoListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{db12017.DespachoMenuItem_enviosCollection}" icon="ui-icon-search"  action="#{despachoController.navigateEnviosCollection}" disabled="#{despachoController.isEnviosCollectionEmpty}" ajax="false"/>  
+                <p:menuitem value="#{db12017.DespachoMenuItem_estatusDespachoCollection}" icon="ui-icon-search"  action="#{despachoController.navigateEstatusDespachoCollection}" disabled="#{despachoController.isEstatusDespachoCollectionEmpty}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{despachoController.items}"
+                         lazy="false"
+                         rowKey="#{item.codDespacho}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{despachoController.selected}"
+                         filteredValue="#{despachoController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{despachoController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.codDespacho}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:DespachoDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:DespachoDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('DespachoListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.codDespacho}" filterBy="#{item.codDespacho}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListDespachoTitle_codDespacho}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codDespacho}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.codPaquete}" filterBy="#{item.codPaquete}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListDespachoTitle_codPaquete}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codPaquete}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.fechaDespacho}" filterBy="#{item.fechaDespacho}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListDespachoTitle_fechaDespacho}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaDespacho}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.numeroHojaDespacho}" filterBy="#{item.numeroHojaDespacho}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListDespachoTitle_numeroHojaDespacho}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.numeroHojaDespacho}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.usuarioDespacho}" filterBy="#{item.usuarioDespacho}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListDespachoTitle_usuarioDespacho}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.usuarioDespacho}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.idEstatusDespacho}" filterBy="#{item.idEstatusDespacho}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListDespachoTitle_idEstatusDespacho}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idEstatusDespacho}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{db12017.Create}" actionListener="#{despachoController.prepareCreate}" update=":DespachoCreateForm" oncomplete="PF('DespachoCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{db12017.View}" update=":DespachoViewForm" oncomplete="PF('DespachoViewDialog').show()" disabled="#{empty despachoController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{db12017.Edit}" update=":DespachoEditForm" oncomplete="PF('DespachoEditDialog').show()" disabled="#{empty despachoController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{db12017.Delete}" actionListener="#{despachoController.delete}" update=":growl,datalist" disabled="#{empty despachoController.selected}">
+                <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

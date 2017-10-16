@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="PaqueteListForm">
+
+        <p:panel header="#{db12017.ListPaqueteTitle}">
+            <p:contextMenu id="PaqueteDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{db12017.Create}" onclick="document.getElementById('PaqueteListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{db12017.View}" onclick="document.getElementById('PaqueteListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{db12017.Edit}" onclick="document.getElementById('PaqueteListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{db12017.Delete}" onclick="document.getElementById('PaqueteListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{db12017.PaqueteMenuItem_vehiculoCollection}" icon="ui-icon-search"  action="#{paqueteController.navigateVehiculoCollection}" disabled="#{paqueteController.isVehiculoCollectionEmpty}" ajax="false"/>  
+                <p:menuitem value="#{db12017.PaqueteMenuItem_estatusPaqueteCollection}" icon="ui-icon-search"  action="#{paqueteController.navigateEstatusPaqueteCollection}" disabled="#{paqueteController.isEstatusPaqueteCollectionEmpty}" ajax="false"/>  
+                <p:menuitem value="#{db12017.PaqueteMenuItem_envios}" icon="ui-icon-search"  actionListener="#{paqueteController.prepareEnvios}" update=":EnviosViewForm" oncomplete="PF('EnviosViewDialog').show()" disabled="#{empty paqueteController.selected.envios}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{paqueteController.items}"
+                         lazy="false"
+                         rowKey="#{item.codPaquete}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{paqueteController.selected}"
+                         filteredValue="#{paqueteController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{paqueteController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.codPaquete}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PaqueteDataTableContextMenu" listener="#{paqueteController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PaqueteDataTableContextMenu" listener="#{paqueteController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{paqueteController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('PaqueteListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.codPaquete}" filterBy="#{item.codPaquete}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListPaqueteTitle_codPaquete}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codPaquete}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.fechaEnvio}" filterBy="#{item.fechaEnvio}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListPaqueteTitle_fechaEnvio}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaEnvio}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.fechaDespacho}" filterBy="#{item.fechaDespacho}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListPaqueteTitle_fechaDespacho}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaDespacho}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.codVehiculo}" filterBy="#{item.codVehiculo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListPaqueteTitle_codVehiculo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codVehiculo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.numeroHojaDespacho}" filterBy="#{item.numeroHojaDespacho}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListPaqueteTitle_numeroHojaDespacho}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.numeroHojaDespacho}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.usuarioEnvioPaquete}" filterBy="#{item.usuarioEnvioPaquete}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListPaqueteTitle_usuarioEnvioPaquete}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.usuarioEnvioPaquete}"/>
+                </p:column>
+
+                <ui:remove>
+                    <p:column sortBy="#{item.estatusPaquete}" filterBy="#{item.estatusPaquete}">
+                        <f:facet name="header">
+                            <h:outputText value="#{db12017.ListPaqueteTitle_estatusPaquete}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.estatusPaquete}"/>
+                    </p:column>
+                </ui:remove>
+                <ui:remove>
+                    <p:column sortBy="#{item.envios.descripcion}" filterBy="#{item.envios.descripcion}">
+                        <f:facet name="header">
+                            <h:outputText value="#{db12017.ListPaqueteTitle_envios}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.envios.descripcion}"/>
+                    </p:column>
+                </ui:remove>
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{db12017.Create}" actionListener="#{paqueteController.prepareCreate}" update=":PaqueteCreateForm" oncomplete="PF('PaqueteCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{db12017.View}" update=":PaqueteViewForm" oncomplete="PF('PaqueteViewDialog').show()" disabled="#{empty paqueteController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{db12017.Edit}" update=":PaqueteEditForm" oncomplete="PF('PaqueteEditDialog').show()" disabled="#{empty paqueteController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{db12017.Delete}" actionListener="#{paqueteController.delete}" update=":growl,datalist" disabled="#{empty paqueteController.selected}">
+                <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

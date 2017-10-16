@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="DireccionesEntregasCreatePage" lazy="true">
+        <pm:header title="#{db12017.CreateDireccionesEntregasTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:DireccionesEntregasListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="DireccionesEntregasCreateForm">
+
+                <h:panelGroup id="display" rendered="#{direccionesEntregasController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateDireccionesEntregasLabel_direccionEntrega}" for="direccionEntrega" />
+                            <p:inputText id="direccionEntrega" value="#{direccionesEntregasController.selected.direccionEntrega}" title="#{db12017.CreateDireccionesEntregasTitle_direccionEntrega}" required="true" requiredMessage="#{db12017.CreateDireccionesEntregasRequiredMessage_direccionEntrega}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateDireccionesEntregasLabel_calle}" for="calle" />
+                            <p:inputText id="calle" value="#{direccionesEntregasController.selected.calle}" title="#{db12017.CreateDireccionesEntregasTitle_calle}" size="100" maxlength="100"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateDireccionesEntregasLabel_avenida}" for="avenida" />
+                            <p:inputText id="avenida" value="#{direccionesEntregasController.selected.avenida}" title="#{db12017.CreateDireccionesEntregasTitle_avenida}" size="100" maxlength="100"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateDireccionesEntregasLabel_noVivienda}" for="noVivienda" />
+                            <p:inputText id="noVivienda" value="#{direccionesEntregasController.selected.noVivienda}" title="#{db12017.CreateDireccionesEntregasTitle_noVivienda}" required="true" requiredMessage="#{db12017.CreateDireccionesEntregasRequiredMessage_noVivienda}" size="10" maxlength="10"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateDireccionesEntregasLabel_zona}" for="zona" />
+                            <p:inputText id="zona" value="#{direccionesEntregasController.selected.zona}" title="#{db12017.CreateDireccionesEntregasTitle_zona}" required="true" requiredMessage="#{db12017.CreateDireccionesEntregasRequiredMessage_zona}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateDireccionesEntregasLabel_provincia}" for="provincia" />
+                            <p:inputText id="provincia" value="#{direccionesEntregasController.selected.provincia}" title="#{db12017.CreateDireccionesEntregasTitle_provincia}" size="100" maxlength="100"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateDireccionesEntregasLabel_municipio}" for="municipio" />
+                            <p:inputText id="municipio" value="#{direccionesEntregasController.selected.municipio}" title="#{db12017.CreateDireccionesEntregasTitle_municipio}" required="true" requiredMessage="#{db12017.CreateDireccionesEntregasRequiredMessage_municipio}" size="100" maxlength="100"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateDireccionesEntregasLabel_pais}" for="pais" />
+                            <p:inputText id="pais" value="#{direccionesEntregasController.selected.pais}" title="#{db12017.CreateDireccionesEntregasTitle_pais}" required="true" requiredMessage="#{db12017.CreateDireccionesEntregasRequiredMessage_pais}" size="100" maxlength="100"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateDireccionesEntregasLabel_codEntrega}" for="codEntrega" />
+                            <p:inputText id="codEntrega" value="#{direccionesEntregasController.selected.codEntrega}" title="#{db12017.CreateDireccionesEntregasTitle_codEntrega}" required="true" requiredMessage="#{db12017.CreateDireccionesEntregasRequiredMessage_codEntrega}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateDireccionesEntregasLabel_entregaCodEntrega}" for="entregaCodEntrega" />
+                            <p:selectOneMenu id="entregaCodEntrega" value="#{direccionesEntregasController.selected.entregaCodEntrega}" required="true" requiredMessage="#{db12017.CreateDireccionesEntregasRequiredMessage_entregaCodEntrega}" converter="entregaConverter">
+                                <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                                <f:selectItems value="#{entregaController.items}"
+                                               var="entregaCodEntregaItem"
+                                               itemValue="#{entregaCodEntregaItem}"
+                                               itemLabel="#{entregaCodEntregaItem.codEntrega.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{direccionesEntregasController.saveNew}" value="#{db12017.Save}" update="display,:DireccionesEntregasListPage:DireccionesEntregasListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:DireccionesEntregasListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

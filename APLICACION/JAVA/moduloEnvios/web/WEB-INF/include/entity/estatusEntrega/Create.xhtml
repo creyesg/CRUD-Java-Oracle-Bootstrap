@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstatusEntregaCreateDlg" widgetVar="EstatusEntregaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{db12017.CreateEstatusEntregaTitle}" closeOnEscape="true">
+
+            <h:form id="EstatusEntregaCreateForm">
+
+                <h:panelGroup id="display" rendered="#{estatusEntregaController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{db12017.CreateEstatusEntregaLabel_estatusEntrega}" for="estatusEntrega" />
+                        <p:inputText id="estatusEntrega" value="#{estatusEntregaController.selected.estatusEntrega}" title="#{db12017.CreateEstatusEntregaTitle_estatusEntrega}" required="true" requiredMessage="#{db12017.CreateEstatusEntregaRequiredMessage_estatusEntrega}"/>
+
+                        <p:outputLabel value="#{db12017.CreateEstatusEntregaLabel_descriEstatusEntrega}" for="descriEstatusEntrega" />
+                        <p:inputText id="descriEstatusEntrega" value="#{estatusEntregaController.selected.descriEstatusEntrega}" title="#{db12017.CreateEstatusEntregaTitle_descriEstatusEntrega}" required="true" requiredMessage="#{db12017.CreateEstatusEntregaRequiredMessage_descriEstatusEntrega}" size="10" maxlength="10"/>
+
+                        <p:outputLabel value="#{db12017.CreateEstatusEntregaLabel_entregaCodEntrega}" for="entregaCodEntrega" />
+                        <p:selectOneMenu id="entregaCodEntrega" value="#{estatusEntregaController.selected.entregaCodEntrega}" required="true" requiredMessage="#{db12017.CreateEstatusEntregaRequiredMessage_entregaCodEntrega}" converter="entregaConverter">
+                            <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                            <f:selectItems value="#{entregaController.items}"
+                                           var="entregaCodEntregaItem"
+                                           itemValue="#{entregaCodEntregaItem}"
+                                           itemLabel="#{entregaCodEntregaItem.codEntrega.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estatusEntregaController.saveNew}" value="#{db12017.Save}" update="display,:EstatusEntregaListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EstatusEntregaCreateDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('EstatusEntregaCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

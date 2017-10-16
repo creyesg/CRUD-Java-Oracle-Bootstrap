@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="EstatusPaqueteEditDlg" widgetVar="EstatusPaqueteEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.EditEstatusPaqueteTitle}" closeOnEscape="true">
+
+            <h:form id="EstatusPaqueteEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{estatusPaqueteController.selected != null}">
+
+
+                        <h:outputLabel value="#{db12017.EditEstatusPaqueteLabel_estatusPaquete}" for="estatusPaquete" />
+                        <h:outputText id="estatusPaquete" value="#{estatusPaqueteController.selected.estatusPaquete}" />
+
+                        <p:outputLabel value="#{db12017.EditEstatusPaqueteLabel_descriEstatusPaquete}" for="descriEstatusPaquete" />
+                        <p:inputText id="descriEstatusPaquete" value="#{estatusPaqueteController.selected.descriEstatusPaquete}" title="#{db12017.EditEstatusPaqueteTitle_descriEstatusPaquete}" required="true" requiredMessage="#{db12017.EditEstatusPaqueteRequiredMessage_descriEstatusPaquete}" size="20" maxlength="20"/>
+
+                        <p:outputLabel value="#{db12017.EditEstatusPaqueteLabel_paqueteCodPaquete}" for="paqueteCodPaquete" />
+                        <p:selectOneMenu id="paqueteCodPaquete" value="#{estatusPaqueteController.selected.paqueteCodPaquete}" required="true" requiredMessage="#{db12017.EditEstatusPaqueteRequiredMessage_paqueteCodPaquete}" converter="paqueteConverter">
+                            <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                            <f:selectItems value="#{paqueteController.items}"
+                                           var="paqueteCodPaqueteItem"
+                                           itemValue="#{paqueteCodPaqueteItem}"
+                                           itemLabel="#{paqueteCodPaqueteItem.codPaquete.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estatusPaqueteController.save}" value="#{db12017.Save}" update="display,:EstatusPaqueteListForm:datalist,:EstatusPaqueteListForm:EstatusPaqueteDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EstatusPaqueteEditDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('EstatusPaqueteEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

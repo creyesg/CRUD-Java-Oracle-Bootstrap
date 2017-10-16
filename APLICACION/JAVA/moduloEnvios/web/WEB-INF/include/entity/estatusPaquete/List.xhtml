@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="EstatusPaqueteListForm">
+
+        <p:panel header="#{db12017.ListEstatusPaqueteTitle}">
+            <p:contextMenu id="EstatusPaqueteDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{db12017.Create}" onclick="document.getElementById('EstatusPaqueteListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{db12017.View}" onclick="document.getElementById('EstatusPaqueteListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{db12017.Edit}" onclick="document.getElementById('EstatusPaqueteListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{db12017.Delete}" onclick="document.getElementById('EstatusPaqueteListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{db12017.EstatusPaqueteMenuItem_paqueteCodPaquete}" icon="ui-icon-search"  actionListener="#{estatusPaqueteController.preparePaqueteCodPaquete}" update=":PaqueteViewForm" oncomplete="PF('PaqueteViewDialog').show()" disabled="#{empty estatusPaqueteController.selected.paqueteCodPaquete}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{estatusPaqueteController.items}"
+                         lazy="false"
+                         rowKey="#{item.estatusPaquete}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{estatusPaqueteController.selected}"
+                         filteredValue="#{estatusPaqueteController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{estatusPaqueteController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.estatusPaquete}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:EstatusPaqueteDataTableContextMenu" listener="#{estatusPaqueteController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:EstatusPaqueteDataTableContextMenu" listener="#{estatusPaqueteController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{estatusPaqueteController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('EstatusPaqueteListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.estatusPaquete}" filterBy="#{item.estatusPaquete}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListEstatusPaqueteTitle_estatusPaquete}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.estatusPaquete}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.descriEstatusPaquete}" filterBy="#{item.descriEstatusPaquete}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListEstatusPaqueteTitle_descriEstatusPaquete}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.descriEstatusPaquete}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.paqueteCodPaquete.codPaquete}" filterBy="#{item.paqueteCodPaquete.codPaquete}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListEstatusPaqueteTitle_paqueteCodPaquete}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.paqueteCodPaquete.codPaquete}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{db12017.Create}" actionListener="#{estatusPaqueteController.prepareCreate}" update=":EstatusPaqueteCreateForm" oncomplete="PF('EstatusPaqueteCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{db12017.View}" update=":EstatusPaqueteViewForm" oncomplete="PF('EstatusPaqueteViewDialog').show()" disabled="#{empty estatusPaqueteController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{db12017.Edit}" update=":EstatusPaqueteEditForm" oncomplete="PF('EstatusPaqueteEditDialog').show()" disabled="#{empty estatusPaqueteController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{db12017.Delete}" actionListener="#{estatusPaqueteController.delete}" update=":growl,datalist" disabled="#{empty estatusPaqueteController.selected}">
+                <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

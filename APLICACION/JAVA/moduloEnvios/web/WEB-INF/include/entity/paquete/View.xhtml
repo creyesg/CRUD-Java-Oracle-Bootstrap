@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PaqueteViewDlg" widgetVar="PaqueteViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.ViewPaqueteTitle}" closeOnEscape="true">
+
+            <h:form id="PaqueteViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{paqueteController.selected != null}">
+
+                        <h:outputText value="#{db12017.ViewPaqueteLabel_codPaquete}"/>
+                        <h:outputText value="#{paqueteController.selected.codPaquete}" title="#{db12017.ViewPaqueteTitle_codPaquete}"/>
+
+                        <h:outputText value="#{db12017.ViewPaqueteLabel_fechaEnvio}"/>
+                        <h:outputText value="#{paqueteController.selected.fechaEnvio}" title="#{db12017.ViewPaqueteTitle_fechaEnvio}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{db12017.ViewPaqueteLabel_fechaDespacho}"/>
+                        <h:outputText value="#{paqueteController.selected.fechaDespacho}" title="#{db12017.ViewPaqueteTitle_fechaDespacho}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{db12017.ViewPaqueteLabel_codVehiculo}"/>
+                        <h:outputText value="#{paqueteController.selected.codVehiculo}" title="#{db12017.ViewPaqueteTitle_codVehiculo}"/>
+
+                        <h:outputText value="#{db12017.ViewPaqueteLabel_numeroHojaDespacho}"/>
+                        <h:outputText value="#{paqueteController.selected.numeroHojaDespacho}" title="#{db12017.ViewPaqueteTitle_numeroHojaDespacho}"/>
+
+                        <h:outputText value="#{db12017.ViewPaqueteLabel_usuarioEnvioPaquete}"/>
+                        <h:outputText value="#{paqueteController.selected.usuarioEnvioPaquete}" title="#{db12017.ViewPaqueteTitle_usuarioEnvioPaquete}"/>
+
+                        <h:outputText value="#{db12017.ViewPaqueteLabel_estatusPaquete}"/>
+                        <h:outputText value="#{paqueteController.selected.estatusPaquete}" title="#{db12017.ViewPaqueteTitle_estatusPaquete}"/>
+
+                        <h:outputText value="#{db12017.ViewPaqueteLabel_envios}"/>
+                        <h:outputText value="#{paqueteController.selected.envios.descripcion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{db12017.Close}" onclick="PF('PaqueteViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

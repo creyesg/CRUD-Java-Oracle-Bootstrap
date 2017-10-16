@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="EstatusDespachoEditDlg" widgetVar="EstatusDespachoEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.EditEstatusDespachoTitle}" closeOnEscape="true">
+
+            <h:form id="EstatusDespachoEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{estatusDespachoController.selected != null}">
+
+
+                        <h:outputLabel value="#{db12017.EditEstatusDespachoLabel_idEstatusDespacho}" for="idEstatusDespacho" />
+                        <h:outputText id="idEstatusDespacho" value="#{estatusDespachoController.selected.idEstatusDespacho}" />
+
+                        <p:outputLabel value="#{db12017.EditEstatusDespachoLabel_descriEstatusDespacho}" for="descriEstatusDespacho" />
+                        <p:inputText id="descriEstatusDespacho" value="#{estatusDespachoController.selected.descriEstatusDespacho}" title="#{db12017.EditEstatusDespachoTitle_descriEstatusDespacho}" size="10" maxlength="10"/>
+
+                        <p:outputLabel value="#{db12017.EditEstatusDespachoLabel_despachoCodDespacho}" for="despachoCodDespacho" />
+                        <p:selectOneMenu id="despachoCodDespacho" value="#{estatusDespachoController.selected.despachoCodDespacho}" required="true" requiredMessage="#{db12017.EditEstatusDespachoRequiredMessage_despachoCodDespacho}" converter="despachoConverter">
+                            <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                            <f:selectItems value="#{despachoController.items}"
+                                           var="despachoCodDespachoItem"
+                                           itemValue="#{despachoCodDespachoItem}"
+                                           itemLabel="#{despachoCodDespachoItem.codDespacho.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estatusDespachoController.save}" value="#{db12017.Save}" update="display,:EstatusDespachoListForm:datalist,:EstatusDespachoListForm:EstatusDespachoDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EstatusDespachoEditDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('EstatusDespachoEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

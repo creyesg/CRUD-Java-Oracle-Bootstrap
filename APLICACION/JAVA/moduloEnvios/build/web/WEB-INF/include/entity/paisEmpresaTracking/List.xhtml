@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="PaisEmpresaTrackingListForm">
+
+        <p:panel header="#{db12017.ListPaisEmpresaTrackingTitle}">
+            <p:contextMenu id="PaisEmpresaTrackingDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{db12017.Create}" onclick="document.getElementById('PaisEmpresaTrackingListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{db12017.View}" onclick="document.getElementById('PaisEmpresaTrackingListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{db12017.Edit}" onclick="document.getElementById('PaisEmpresaTrackingListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{db12017.Delete}" onclick="document.getElementById('PaisEmpresaTrackingListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{db12017.PaisEmpresaTrackingMenuItem_trackingCodTracking}" icon="ui-icon-search"  actionListener="#{paisEmpresaTrackingController.prepareTrackingCodTracking}" update=":TrackingViewForm" oncomplete="PF('TrackingViewDialog').show()" disabled="#{empty paisEmpresaTrackingController.selected.trackingCodTracking}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{paisEmpresaTrackingController.items}"
+                         lazy="false"
+                         rowKey="#{item.codPaisTracking}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{paisEmpresaTrackingController.selected}"
+                         filteredValue="#{paisEmpresaTrackingController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{paisEmpresaTrackingController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.codPaisTracking}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PaisEmpresaTrackingDataTableContextMenu" listener="#{paisEmpresaTrackingController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:PaisEmpresaTrackingDataTableContextMenu" listener="#{paisEmpresaTrackingController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{paisEmpresaTrackingController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('PaisEmpresaTrackingListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.codPaisTracking}" filterBy="#{item.codPaisTracking}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListPaisEmpresaTrackingTitle_codPaisTracking}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codPaisTracking}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.descripcionPais}" filterBy="#{item.descripcionPais}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListPaisEmpresaTrackingTitle_descripcionPais}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.descripcionPais}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.trackingCodTracking.codTracking}" filterBy="#{item.trackingCodTracking.codTracking}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListPaisEmpresaTrackingTitle_trackingCodTracking}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.trackingCodTracking.codTracking}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{db12017.Create}" actionListener="#{paisEmpresaTrackingController.prepareCreate}" update=":PaisEmpresaTrackingCreateForm" oncomplete="PF('PaisEmpresaTrackingCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{db12017.View}" update=":PaisEmpresaTrackingViewForm" oncomplete="PF('PaisEmpresaTrackingViewDialog').show()" disabled="#{empty paisEmpresaTrackingController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{db12017.Edit}" update=":PaisEmpresaTrackingEditForm" oncomplete="PF('PaisEmpresaTrackingEditDialog').show()" disabled="#{empty paisEmpresaTrackingController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{db12017.Delete}" actionListener="#{paisEmpresaTrackingController.delete}" update=":growl,datalist" disabled="#{empty paisEmpresaTrackingController.selected}">
+                <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

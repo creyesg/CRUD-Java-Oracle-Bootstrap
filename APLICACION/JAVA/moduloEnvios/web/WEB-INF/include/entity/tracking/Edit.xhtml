@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="TrackingEditDlg" widgetVar="TrackingEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.EditTrackingTitle}" closeOnEscape="true">
+
+            <h:form id="TrackingEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{trackingController.selected != null}">
+
+
+                        <h:outputLabel value="#{db12017.EditTrackingLabel_codTracking}" for="codTracking" />
+                        <h:outputText id="codTracking" value="#{trackingController.selected.codTracking}" />
+
+                        <p:outputLabel value="#{db12017.EditTrackingLabel_codEmpresaTracking}" for="codEmpresaTracking" />
+                        <p:inputText id="codEmpresaTracking" value="#{trackingController.selected.codEmpresaTracking}" title="#{db12017.EditTrackingTitle_codEmpresaTracking}" required="true" requiredMessage="#{db12017.EditTrackingRequiredMessage_codEmpresaTracking}"/>
+
+                        <p:outputLabel value="#{db12017.EditTrackingLabel_codPaisTracking}" for="codPaisTracking" />
+                        <p:inputText id="codPaisTracking" value="#{trackingController.selected.codPaisTracking}" title="#{db12017.EditTrackingTitle_codPaisTracking}" required="true" requiredMessage="#{db12017.EditTrackingRequiredMessage_codPaisTracking}"/>
+
+                        <p:outputLabel value="#{db12017.EditTrackingLabel_codEstatusTracking}" for="codEstatusTracking" />
+                        <p:inputText id="codEstatusTracking" value="#{trackingController.selected.codEstatusTracking}" title="#{db12017.EditTrackingTitle_codEstatusTracking}"/>
+
+                        <p:outputLabel value="#{db12017.EditTrackingLabel_numeroHojaDespacho}" for="numeroHojaDespacho" />
+                        <p:inputText id="numeroHojaDespacho" value="#{trackingController.selected.numeroHojaDespacho}" title="#{db12017.EditTrackingTitle_numeroHojaDespacho}"/>
+
+                        <p:outputLabel value="#{db12017.EditTrackingLabel_envios}" for="envios" />
+                        <p:selectOneMenu id="envios" value="#{trackingController.selected.envios}" required="true" requiredMessage="#{db12017.EditTrackingRequiredMessage_envios}" converter="enviosConverter">
+                            <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                            <f:selectItems value="#{enviosController.items}"
+                                           var="enviosItem"
+                                           itemValue="#{enviosItem}"
+                                           itemLabel="#{enviosItem.descripcion.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{trackingController.save}" value="#{db12017.Save}" update="display,:TrackingListForm:datalist,:TrackingListForm:TrackingDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('TrackingEditDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('TrackingEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

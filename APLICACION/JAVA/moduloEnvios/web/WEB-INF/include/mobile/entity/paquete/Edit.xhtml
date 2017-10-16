@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="PaqueteEditPage" lazy="true">
+        <pm:header title="#{db12017.EditPaqueteTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:PaqueteListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="PaqueteEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{paqueteController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{db12017.EditPaqueteLabel_codPaquete}" for="codPaquete" />
+                            <h:outputText id="codPaquete" value="#{paqueteController.selected.codPaquete}" />
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditPaqueteLabel_fechaEnvio}" for="fechaEnvio" />
+                            <p:calendar id="fechaEnvio" pattern="MM/dd/yyyy HH:mm:ss" value="#{paqueteController.selected.fechaEnvio}" title="#{db12017.EditPaqueteTitle_fechaEnvio}" required="true" requiredMessage="#{db12017.EditPaqueteRequiredMessage_fechaEnvio}" showOn="button"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditPaqueteLabel_fechaDespacho}" for="fechaDespacho" />
+                            <p:calendar id="fechaDespacho" pattern="MM/dd/yyyy HH:mm:ss" value="#{paqueteController.selected.fechaDespacho}" title="#{db12017.EditPaqueteTitle_fechaDespacho}"  showOn="button"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditPaqueteLabel_codVehiculo}" for="codVehiculo" />
+                            <p:inputText id="codVehiculo" value="#{paqueteController.selected.codVehiculo}" title="#{db12017.EditPaqueteTitle_codVehiculo}" required="true" requiredMessage="#{db12017.EditPaqueteRequiredMessage_codVehiculo}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditPaqueteLabel_numeroHojaDespacho}" for="numeroHojaDespacho" />
+                            <p:inputText id="numeroHojaDespacho" value="#{paqueteController.selected.numeroHojaDespacho}" title="#{db12017.EditPaqueteTitle_numeroHojaDespacho}" required="true" requiredMessage="#{db12017.EditPaqueteRequiredMessage_numeroHojaDespacho}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditPaqueteLabel_usuarioEnvioPaquete}" for="usuarioEnvioPaquete" />
+                            <p:inputText id="usuarioEnvioPaquete" value="#{paqueteController.selected.usuarioEnvioPaquete}" title="#{db12017.EditPaqueteTitle_usuarioEnvioPaquete}" required="true" requiredMessage="#{db12017.EditPaqueteRequiredMessage_usuarioEnvioPaquete}" size="100" maxlength="100"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditPaqueteLabel_estatusPaquete}" for="estatusPaquete" />
+                            <p:inputText id="estatusPaquete" value="#{paqueteController.selected.estatusPaquete}" title="#{db12017.EditPaqueteTitle_estatusPaquete}" required="true" requiredMessage="#{db12017.EditPaqueteRequiredMessage_estatusPaquete}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditPaqueteLabel_envios}" for="envios" />
+                            <p:selectOneMenu id="envios" value="#{paqueteController.selected.envios}" required="true" requiredMessage="#{db12017.EditPaqueteRequiredMessage_envios}" converter="enviosConverter">
+                                <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                                <f:selectItems value="#{enviosController.items}"
+                                               var="enviosItem"
+                                               itemValue="#{enviosItem}"
+                                               itemLabel="#{enviosItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{paqueteController.save}" value="#{db12017.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:PaqueteListPage:PaqueteListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:PaqueteListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="EstatusMensajeroViewPage" lazy="true">
+        <pm:header title="#{db12017.ViewEstatusMensajeroTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:EstatusMensajeroListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="EstatusMensajeroViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{estatusMensajeroController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewEstatusMensajeroLabel_estatusMensajero}"/>
+                            <h:outputText value="#{estatusMensajeroController.selected.estatusMensajero}" title="#{db12017.ViewEstatusMensajeroTitle_estatusMensajero}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewEstatusMensajeroLabel_descriEstatusMensajero}"/>
+                            <h:outputText value="#{estatusMensajeroController.selected.descriEstatusMensajero}" title="#{db12017.ViewEstatusMensajeroTitle_descriEstatusMensajero}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewEstatusMensajeroLabel_mensajerosCodMensajero}"/>
+                            <h:outputText value="#{estatusMensajeroController.selected.mensajerosCodMensajero.codMensajero}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

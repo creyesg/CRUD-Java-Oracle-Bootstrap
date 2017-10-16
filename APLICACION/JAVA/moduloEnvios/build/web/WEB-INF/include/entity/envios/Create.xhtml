@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EnviosCreateDlg" widgetVar="EnviosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{db12017.CreateEnviosTitle}" closeOnEscape="true">
+
+            <h:form id="EnviosCreateForm">
+
+                <h:panelGroup id="display" rendered="#{enviosController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{db12017.CreateEnviosLabel_enviosPK_numeroHojaDespacho}" for="enviosPK_numeroHojaDespacho" />
+                        <p:inputText id="enviosPK_numeroHojaDespacho" value="#{enviosController.selected.enviosPK.numeroHojaDespacho}" title="#{db12017.CreateEnviosTitle_enviosPK_numeroHojaDespacho}" required="true" requiredMessage="#{db12017.CreateEnviosRequiredMessage_enviosPK_numeroHojaDespacho}"/>
+
+                        <p:outputLabel value="#{db12017.CreateEnviosLabel_enviosPK_codEntrega}" for="enviosPK_codEntrega" />
+                        <p:inputText id="enviosPK_codEntrega" value="#{enviosController.selected.enviosPK.codEntrega}" title="#{db12017.CreateEnviosTitle_enviosPK_codEntrega}" required="true" requiredMessage="#{db12017.CreateEnviosRequiredMessage_enviosPK_codEntrega}"/>
+
+                        <p:outputLabel value="#{db12017.CreateEnviosLabel_fechaEnvio}" for="fechaEnvio" />
+                        <p:calendar id="fechaEnvio" pattern="MM/dd/yyyy HH:mm:ss" value="#{enviosController.selected.fechaEnvio}" title="#{db12017.CreateEnviosTitle_fechaEnvio}" required="true" requiredMessage="#{db12017.CreateEnviosRequiredMessage_fechaEnvio}" showOn="button"/>
+
+                        <p:outputLabel value="#{db12017.CreateEnviosLabel_idUnidad}" for="idUnidad" />
+                        <p:inputText id="idUnidad" value="#{enviosController.selected.idUnidad}" title="#{db12017.CreateEnviosTitle_idUnidad}" required="true" requiredMessage="#{db12017.CreateEnviosRequiredMessage_idUnidad}"/>
+
+                        <p:outputLabel value="#{db12017.CreateEnviosLabel_codTracking}" for="codTracking" />
+                        <p:inputText id="codTracking" value="#{enviosController.selected.codTracking}" title="#{db12017.CreateEnviosTitle_codTracking}"/>
+
+                        <p:outputLabel value="#{db12017.CreateEnviosLabel_descripcion}" for="descripcion" />
+                        <p:inputTextarea rows="4" cols="30" id="descripcion" value="#{enviosController.selected.descripcion}" title="#{db12017.CreateEnviosTitle_descripcion}" required="true" requiredMessage="#{db12017.CreateEnviosRequiredMessage_descripcion}"/>
+
+                        <p:outputLabel value="#{db12017.CreateEnviosLabel_usuarioEnvio}" for="usuarioEnvio" />
+                        <p:inputText id="usuarioEnvio" value="#{enviosController.selected.usuarioEnvio}" title="#{db12017.CreateEnviosTitle_usuarioEnvio}" required="true" requiredMessage="#{db12017.CreateEnviosRequiredMessage_usuarioEnvio}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{db12017.CreateEnviosLabel_codPaquete}" for="codPaquete" />
+                        <p:inputText id="codPaquete" value="#{enviosController.selected.codPaquete}" title="#{db12017.CreateEnviosTitle_codPaquete}" required="true" requiredMessage="#{db12017.CreateEnviosRequiredMessage_codPaquete}"/>
+
+                        <p:outputLabel value="#{db12017.CreateEnviosLabel_nombreEnvia}" for="nombreEnvia" />
+                        <p:inputText id="nombreEnvia" value="#{enviosController.selected.nombreEnvia}" title="#{db12017.CreateEnviosTitle_nombreEnvia}" required="true" requiredMessage="#{db12017.CreateEnviosRequiredMessage_nombreEnvia}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{db12017.CreateEnviosLabel_despachoCodDespacho}" for="despachoCodDespacho" />
+                        <p:selectOneMenu id="despachoCodDespacho" value="#{enviosController.selected.despachoCodDespacho}" required="true" requiredMessage="#{db12017.CreateEnviosRequiredMessage_despachoCodDespacho}" converter="despachoConverter">
+                            <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                            <f:selectItems value="#{despachoController.items}"
+                                           var="despachoCodDespachoItem"
+                                           itemValue="#{despachoCodDespachoItem}"
+                                           itemLabel="#{despachoCodDespachoItem.codDespacho.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{enviosController.saveNew}" value="#{db12017.Save}" update="display,:EnviosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EnviosCreateDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('EnviosCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="EstatusVehiculoEditPage" lazy="true">
+        <pm:header title="#{db12017.EditEstatusVehiculoTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:EstatusVehiculoListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="EstatusVehiculoEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{estatusVehiculoController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{db12017.EditEstatusVehiculoLabel_estatusVehiculo}" for="estatusVehiculo" />
+                            <h:outputText id="estatusVehiculo" value="#{estatusVehiculoController.selected.estatusVehiculo}" />
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditEstatusVehiculoLabel_descriEstatusVehiculo}" for="descriEstatusVehiculo" />
+                            <p:inputText id="descriEstatusVehiculo" value="#{estatusVehiculoController.selected.descriEstatusVehiculo}" title="#{db12017.EditEstatusVehiculoTitle_descriEstatusVehiculo}" required="true" requiredMessage="#{db12017.EditEstatusVehiculoRequiredMessage_descriEstatusVehiculo}" size="50" maxlength="50"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditEstatusVehiculoLabel_vehiculoCodVehiculo}" for="vehiculoCodVehiculo" />
+                            <p:selectOneMenu id="vehiculoCodVehiculo" value="#{estatusVehiculoController.selected.vehiculoCodVehiculo}" required="true" requiredMessage="#{db12017.EditEstatusVehiculoRequiredMessage_vehiculoCodVehiculo}" converter="vehiculoConverter">
+                                <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                                <f:selectItems value="#{vehiculoController.items}"
+                                               var="vehiculoCodVehiculoItem"
+                                               itemValue="#{vehiculoCodVehiculoItem}"
+                                               itemLabel="#{vehiculoCodVehiculoItem.codVehiculo.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{estatusVehiculoController.save}" value="#{db12017.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:EstatusVehiculoListPage:EstatusVehiculoListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:EstatusVehiculoListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

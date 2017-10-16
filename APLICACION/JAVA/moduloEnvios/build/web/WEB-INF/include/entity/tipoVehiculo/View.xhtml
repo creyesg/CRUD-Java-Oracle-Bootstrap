@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoVehiculoViewDlg" widgetVar="TipoVehiculoViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.ViewTipoVehiculoTitle}" closeOnEscape="true">
+
+            <h:form id="TipoVehiculoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{tipoVehiculoController.selected != null}">
+
+                        <h:outputText value="#{db12017.ViewTipoVehiculoLabel_tipoVehiculo}"/>
+                        <h:outputText value="#{tipoVehiculoController.selected.tipoVehiculo}" title="#{db12017.ViewTipoVehiculoTitle_tipoVehiculo}"/>
+
+                        <h:outputText value="#{db12017.ViewTipoVehiculoLabel_descriTipoVehiculo}"/>
+                        <h:outputText value="#{tipoVehiculoController.selected.descriTipoVehiculo}" title="#{db12017.ViewTipoVehiculoTitle_descriTipoVehiculo}"/>
+
+                        <h:outputText value="#{db12017.ViewTipoVehiculoLabel_vehiculoCodVehiculo}"/>
+                        <h:outputText value="#{tipoVehiculoController.selected.vehiculoCodVehiculo.codVehiculo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{db12017.Close}" onclick="PF('TipoVehiculoViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

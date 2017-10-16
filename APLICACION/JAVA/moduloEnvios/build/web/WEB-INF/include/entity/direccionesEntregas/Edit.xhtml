@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="DireccionesEntregasEditDlg" widgetVar="DireccionesEntregasEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.EditDireccionesEntregasTitle}" closeOnEscape="true">
+
+            <h:form id="DireccionesEntregasEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{direccionesEntregasController.selected != null}">
+
+
+                        <h:outputLabel value="#{db12017.EditDireccionesEntregasLabel_direccionEntrega}" for="direccionEntrega" />
+                        <h:outputText id="direccionEntrega" value="#{direccionesEntregasController.selected.direccionEntrega}" />
+
+                        <p:outputLabel value="#{db12017.EditDireccionesEntregasLabel_calle}" for="calle" />
+                        <p:inputText id="calle" value="#{direccionesEntregasController.selected.calle}" title="#{db12017.EditDireccionesEntregasTitle_calle}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{db12017.EditDireccionesEntregasLabel_avenida}" for="avenida" />
+                        <p:inputText id="avenida" value="#{direccionesEntregasController.selected.avenida}" title="#{db12017.EditDireccionesEntregasTitle_avenida}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{db12017.EditDireccionesEntregasLabel_noVivienda}" for="noVivienda" />
+                        <p:inputText id="noVivienda" value="#{direccionesEntregasController.selected.noVivienda}" title="#{db12017.EditDireccionesEntregasTitle_noVivienda}" required="true" requiredMessage="#{db12017.EditDireccionesEntregasRequiredMessage_noVivienda}" size="10" maxlength="10"/>
+
+                        <p:outputLabel value="#{db12017.EditDireccionesEntregasLabel_zona}" for="zona" />
+                        <p:inputText id="zona" value="#{direccionesEntregasController.selected.zona}" title="#{db12017.EditDireccionesEntregasTitle_zona}" required="true" requiredMessage="#{db12017.EditDireccionesEntregasRequiredMessage_zona}"/>
+
+                        <p:outputLabel value="#{db12017.EditDireccionesEntregasLabel_provincia}" for="provincia" />
+                        <p:inputText id="provincia" value="#{direccionesEntregasController.selected.provincia}" title="#{db12017.EditDireccionesEntregasTitle_provincia}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{db12017.EditDireccionesEntregasLabel_municipio}" for="municipio" />
+                        <p:inputText id="municipio" value="#{direccionesEntregasController.selected.municipio}" title="#{db12017.EditDireccionesEntregasTitle_municipio}" required="true" requiredMessage="#{db12017.EditDireccionesEntregasRequiredMessage_municipio}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{db12017.EditDireccionesEntregasLabel_pais}" for="pais" />
+                        <p:inputText id="pais" value="#{direccionesEntregasController.selected.pais}" title="#{db12017.EditDireccionesEntregasTitle_pais}" required="true" requiredMessage="#{db12017.EditDireccionesEntregasRequiredMessage_pais}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{db12017.EditDireccionesEntregasLabel_codEntrega}" for="codEntrega" />
+                        <p:inputText id="codEntrega" value="#{direccionesEntregasController.selected.codEntrega}" title="#{db12017.EditDireccionesEntregasTitle_codEntrega}" required="true" requiredMessage="#{db12017.EditDireccionesEntregasRequiredMessage_codEntrega}"/>
+
+                        <p:outputLabel value="#{db12017.EditDireccionesEntregasLabel_entregaCodEntrega}" for="entregaCodEntrega" />
+                        <p:selectOneMenu id="entregaCodEntrega" value="#{direccionesEntregasController.selected.entregaCodEntrega}" required="true" requiredMessage="#{db12017.EditDireccionesEntregasRequiredMessage_entregaCodEntrega}" converter="entregaConverter">
+                            <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                            <f:selectItems value="#{entregaController.items}"
+                                           var="entregaCodEntregaItem"
+                                           itemValue="#{entregaCodEntregaItem}"
+                                           itemLabel="#{entregaCodEntregaItem.codEntrega.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{direccionesEntregasController.save}" value="#{db12017.Save}" update="display,:DireccionesEntregasListForm:datalist,:DireccionesEntregasListForm:DireccionesEntregasDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('DireccionesEntregasEditDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('DireccionesEntregasEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

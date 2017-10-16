@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="MensajerosEditPage" lazy="true">
+        <pm:header title="#{db12017.EditMensajerosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:MensajerosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="MensajerosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{mensajerosController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{db12017.EditMensajerosLabel_codMensajero}" for="codMensajero" />
+                            <h:outputText id="codMensajero" value="#{mensajerosController.selected.codMensajero}" />
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditMensajerosLabel_primerNombreMensajero}" for="primerNombreMensajero" />
+                            <p:inputText id="primerNombreMensajero" value="#{mensajerosController.selected.primerNombreMensajero}" title="#{db12017.EditMensajerosTitle_primerNombreMensajero}" required="true" requiredMessage="#{db12017.EditMensajerosRequiredMessage_primerNombreMensajero}" size="50" maxlength="50"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditMensajerosLabel_segundoNombreMensajero}" for="segundoNombreMensajero" />
+                            <p:inputText id="segundoNombreMensajero" value="#{mensajerosController.selected.segundoNombreMensajero}" title="#{db12017.EditMensajerosTitle_segundoNombreMensajero}" size="50" maxlength="50"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditMensajerosLabel_primerApellidoMensajero}" for="primerApellidoMensajero" />
+                            <p:inputText id="primerApellidoMensajero" value="#{mensajerosController.selected.primerApellidoMensajero}" title="#{db12017.EditMensajerosTitle_primerApellidoMensajero}" required="true" requiredMessage="#{db12017.EditMensajerosRequiredMessage_primerApellidoMensajero}" size="50" maxlength="50"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditMensajerosLabel_segundoApellidoMensajero}" for="segundoApellidoMensajero" />
+                            <p:inputText id="segundoApellidoMensajero" value="#{mensajerosController.selected.segundoApellidoMensajero}" title="#{db12017.EditMensajerosTitle_segundoApellidoMensajero}" size="50" maxlength="50"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditMensajerosLabel_estatusMensajero}" for="estatusMensajero" />
+                            <p:inputText id="estatusMensajero" value="#{mensajerosController.selected.estatusMensajero}" title="#{db12017.EditMensajerosTitle_estatusMensajero}" required="true" requiredMessage="#{db12017.EditMensajerosRequiredMessage_estatusMensajero}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.EditMensajerosLabel_vehiculoCodVehiculo}" for="vehiculoCodVehiculo" />
+                            <p:selectOneMenu id="vehiculoCodVehiculo" value="#{mensajerosController.selected.vehiculoCodVehiculo}" required="true" requiredMessage="#{db12017.EditMensajerosRequiredMessage_vehiculoCodVehiculo}" converter="vehiculoConverter">
+                                <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                                <f:selectItems value="#{vehiculoController.items}"
+                                               var="vehiculoCodVehiculoItem"
+                                               itemValue="#{vehiculoCodVehiculoItem}"
+                                               itemLabel="#{vehiculoCodVehiculoItem.codVehiculo.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{mensajerosController.save}" value="#{db12017.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:MensajerosListPage:MensajerosListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:MensajerosListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

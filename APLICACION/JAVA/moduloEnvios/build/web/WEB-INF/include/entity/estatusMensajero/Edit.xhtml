@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="EstatusMensajeroEditDlg" widgetVar="EstatusMensajeroEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.EditEstatusMensajeroTitle}" closeOnEscape="true">
+
+            <h:form id="EstatusMensajeroEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{estatusMensajeroController.selected != null}">
+
+
+                        <h:outputLabel value="#{db12017.EditEstatusMensajeroLabel_estatusMensajero}" for="estatusMensajero" />
+                        <h:outputText id="estatusMensajero" value="#{estatusMensajeroController.selected.estatusMensajero}" />
+
+                        <p:outputLabel value="#{db12017.EditEstatusMensajeroLabel_descriEstatusMensajero}" for="descriEstatusMensajero" />
+                        <p:inputText id="descriEstatusMensajero" value="#{estatusMensajeroController.selected.descriEstatusMensajero}" title="#{db12017.EditEstatusMensajeroTitle_descriEstatusMensajero}" required="true" requiredMessage="#{db12017.EditEstatusMensajeroRequiredMessage_descriEstatusMensajero}" size="20" maxlength="20"/>
+
+                        <p:outputLabel value="#{db12017.EditEstatusMensajeroLabel_mensajerosCodMensajero}" for="mensajerosCodMensajero" />
+                        <p:selectOneMenu id="mensajerosCodMensajero" value="#{estatusMensajeroController.selected.mensajerosCodMensajero}" required="true" requiredMessage="#{db12017.EditEstatusMensajeroRequiredMessage_mensajerosCodMensajero}" converter="mensajerosConverter">
+                            <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                            <f:selectItems value="#{mensajerosController.items}"
+                                           var="mensajerosCodMensajeroItem"
+                                           itemValue="#{mensajerosCodMensajeroItem}"
+                                           itemLabel="#{mensajerosCodMensajeroItem.codMensajero.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estatusMensajeroController.save}" value="#{db12017.Save}" update="display,:EstatusMensajeroListForm:datalist,:EstatusMensajeroListForm:EstatusMensajeroDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EstatusMensajeroEditDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('EstatusMensajeroEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

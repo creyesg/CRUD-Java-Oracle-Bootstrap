@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstatusTrackingCreateDlg" widgetVar="EstatusTrackingCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{db12017.CreateEstatusTrackingTitle}" closeOnEscape="true">
+
+            <h:form id="EstatusTrackingCreateForm">
+
+                <h:panelGroup id="display" rendered="#{estatusTrackingController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{db12017.CreateEstatusTrackingLabel_codEstatusTracking}" for="codEstatusTracking" />
+                        <p:inputText id="codEstatusTracking" value="#{estatusTrackingController.selected.codEstatusTracking}" title="#{db12017.CreateEstatusTrackingTitle_codEstatusTracking}" required="true" requiredMessage="#{db12017.CreateEstatusTrackingRequiredMessage_codEstatusTracking}"/>
+
+                        <p:outputLabel value="#{db12017.CreateEstatusTrackingLabel_descriEstatusTracking}" for="descriEstatusTracking" />
+                        <p:inputText id="descriEstatusTracking" value="#{estatusTrackingController.selected.descriEstatusTracking}" title="#{db12017.CreateEstatusTrackingTitle_descriEstatusTracking}" required="true" requiredMessage="#{db12017.CreateEstatusTrackingRequiredMessage_descriEstatusTracking}" size="10" maxlength="10"/>
+
+                        <p:outputLabel value="#{db12017.CreateEstatusTrackingLabel_trackingCodTracking}" for="trackingCodTracking" />
+                        <p:selectOneMenu id="trackingCodTracking" value="#{estatusTrackingController.selected.trackingCodTracking}" required="true" requiredMessage="#{db12017.CreateEstatusTrackingRequiredMessage_trackingCodTracking}" converter="trackingConverter">
+                            <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                            <f:selectItems value="#{trackingController.items}"
+                                           var="trackingCodTrackingItem"
+                                           itemValue="#{trackingCodTrackingItem}"
+                                           itemLabel="#{trackingCodTrackingItem.codTracking.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estatusTrackingController.saveNew}" value="#{db12017.Save}" update="display,:EstatusTrackingListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EstatusTrackingCreateDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('EstatusTrackingCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

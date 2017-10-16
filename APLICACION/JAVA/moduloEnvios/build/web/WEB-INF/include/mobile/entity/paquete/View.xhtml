@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="PaqueteViewPage" lazy="true">
+        <pm:header title="#{db12017.ViewPaqueteTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:PaqueteListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="PaqueteViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{paqueteController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewPaqueteLabel_codPaquete}"/>
+                            <h:outputText value="#{paqueteController.selected.codPaquete}" title="#{db12017.ViewPaqueteTitle_codPaquete}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewPaqueteLabel_fechaEnvio}"/>
+                            <h:outputText value="#{paqueteController.selected.fechaEnvio}" title="#{db12017.ViewPaqueteTitle_fechaEnvio}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewPaqueteLabel_fechaDespacho}"/>
+                            <h:outputText value="#{paqueteController.selected.fechaDespacho}" title="#{db12017.ViewPaqueteTitle_fechaDespacho}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewPaqueteLabel_codVehiculo}"/>
+                            <h:outputText value="#{paqueteController.selected.codVehiculo}" title="#{db12017.ViewPaqueteTitle_codVehiculo}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewPaqueteLabel_numeroHojaDespacho}"/>
+                            <h:outputText value="#{paqueteController.selected.numeroHojaDespacho}" title="#{db12017.ViewPaqueteTitle_numeroHojaDespacho}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewPaqueteLabel_usuarioEnvioPaquete}"/>
+                            <h:outputText value="#{paqueteController.selected.usuarioEnvioPaquete}" title="#{db12017.ViewPaqueteTitle_usuarioEnvioPaquete}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewPaqueteLabel_estatusPaquete}"/>
+                            <h:outputText value="#{paqueteController.selected.estatusPaquete}" title="#{db12017.ViewPaqueteTitle_estatusPaquete}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewPaqueteLabel_envios}"/>
+                            <h:outputText value="#{paqueteController.selected.envios.descripcion}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

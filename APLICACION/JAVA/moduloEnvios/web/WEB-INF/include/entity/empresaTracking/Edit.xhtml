@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="EmpresaTrackingEditDlg" widgetVar="EmpresaTrackingEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.EditEmpresaTrackingTitle}" closeOnEscape="true">
+
+            <h:form id="EmpresaTrackingEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{empresaTrackingController.selected != null}">
+
+
+                        <h:outputLabel value="#{db12017.EditEmpresaTrackingLabel_codEmpresaTracking}" for="codEmpresaTracking" />
+                        <h:outputText id="codEmpresaTracking" value="#{empresaTrackingController.selected.codEmpresaTracking}" />
+
+                        <p:outputLabel value="#{db12017.EditEmpresaTrackingLabel_nombreEmpresaTracking}" for="nombreEmpresaTracking" />
+                        <p:inputText id="nombreEmpresaTracking" value="#{empresaTrackingController.selected.nombreEmpresaTracking}" title="#{db12017.EditEmpresaTrackingTitle_nombreEmpresaTracking}" size="200" maxlength="200"/>
+
+                        <p:outputLabel value="#{db12017.EditEmpresaTrackingLabel_trackingCodTracking}" for="trackingCodTracking" />
+                        <p:inputText id="trackingCodTracking" value="#{empresaTrackingController.selected.trackingCodTracking}" title="#{db12017.EditEmpresaTrackingTitle_trackingCodTracking}" required="true" requiredMessage="#{db12017.EditEmpresaTrackingRequiredMessage_trackingCodTracking}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{empresaTrackingController.save}" value="#{db12017.Save}" update="display,:EmpresaTrackingListForm:datalist,:EmpresaTrackingListForm:EmpresaTrackingDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EmpresaTrackingEditDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('EmpresaTrackingEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

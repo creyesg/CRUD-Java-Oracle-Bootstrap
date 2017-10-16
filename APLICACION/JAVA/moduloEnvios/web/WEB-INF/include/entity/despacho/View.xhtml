@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DespachoViewDlg" widgetVar="DespachoViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.ViewDespachoTitle}" closeOnEscape="true">
+
+            <h:form id="DespachoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{despachoController.selected != null}">
+
+                        <h:outputText value="#{db12017.ViewDespachoLabel_codDespacho}"/>
+                        <h:outputText value="#{despachoController.selected.codDespacho}" title="#{db12017.ViewDespachoTitle_codDespacho}"/>
+
+                        <h:outputText value="#{db12017.ViewDespachoLabel_codPaquete}"/>
+                        <h:outputText value="#{despachoController.selected.codPaquete}" title="#{db12017.ViewDespachoTitle_codPaquete}"/>
+
+                        <h:outputText value="#{db12017.ViewDespachoLabel_fechaDespacho}"/>
+                        <h:outputText value="#{despachoController.selected.fechaDespacho}" title="#{db12017.ViewDespachoTitle_fechaDespacho}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{db12017.ViewDespachoLabel_numeroHojaDespacho}"/>
+                        <h:outputText value="#{despachoController.selected.numeroHojaDespacho}" title="#{db12017.ViewDespachoTitle_numeroHojaDespacho}"/>
+
+                        <h:outputText value="#{db12017.ViewDespachoLabel_usuarioDespacho}"/>
+                        <h:outputText value="#{despachoController.selected.usuarioDespacho}" title="#{db12017.ViewDespachoTitle_usuarioDespacho}"/>
+
+                        <h:outputText value="#{db12017.ViewDespachoLabel_idEstatusDespacho}"/>
+                        <h:outputText value="#{despachoController.selected.idEstatusDespacho}" title="#{db12017.ViewDespachoTitle_idEstatusDespacho}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{db12017.Close}" onclick="PF('DespachoViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

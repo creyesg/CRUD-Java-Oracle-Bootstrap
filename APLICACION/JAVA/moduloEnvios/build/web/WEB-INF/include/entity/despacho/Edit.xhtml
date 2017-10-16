@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="DespachoEditDlg" widgetVar="DespachoEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.EditDespachoTitle}" closeOnEscape="true">
+
+            <h:form id="DespachoEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{despachoController.selected != null}">
+
+
+                        <h:outputLabel value="#{db12017.EditDespachoLabel_codDespacho}" for="codDespacho" />
+                        <h:outputText id="codDespacho" value="#{despachoController.selected.codDespacho}" />
+
+                        <p:outputLabel value="#{db12017.EditDespachoLabel_codPaquete}" for="codPaquete" />
+                        <p:inputText id="codPaquete" value="#{despachoController.selected.codPaquete}" title="#{db12017.EditDespachoTitle_codPaquete}" required="true" requiredMessage="#{db12017.EditDespachoRequiredMessage_codPaquete}"/>
+
+                        <p:outputLabel value="#{db12017.EditDespachoLabel_fechaDespacho}" for="fechaDespacho" />
+                        <p:calendar id="fechaDespacho" pattern="MM/dd/yyyy HH:mm:ss" value="#{despachoController.selected.fechaDespacho}" title="#{db12017.EditDespachoTitle_fechaDespacho}"  showOn="button"/>
+
+                        <p:outputLabel value="#{db12017.EditDespachoLabel_numeroHojaDespacho}" for="numeroHojaDespacho" />
+                        <p:inputText id="numeroHojaDespacho" value="#{despachoController.selected.numeroHojaDespacho}" title="#{db12017.EditDespachoTitle_numeroHojaDespacho}"/>
+
+                        <p:outputLabel value="#{db12017.EditDespachoLabel_usuarioDespacho}" for="usuarioDespacho" />
+                        <p:inputText id="usuarioDespacho" value="#{despachoController.selected.usuarioDespacho}" title="#{db12017.EditDespachoTitle_usuarioDespacho}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{db12017.EditDespachoLabel_idEstatusDespacho}" for="idEstatusDespacho" />
+                        <p:inputText id="idEstatusDespacho" value="#{despachoController.selected.idEstatusDespacho}" title="#{db12017.EditDespachoTitle_idEstatusDespacho}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{despachoController.save}" value="#{db12017.Save}" update="display,:DespachoListForm:datalist,:DespachoListForm:DespachoDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('DespachoEditDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('DespachoEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

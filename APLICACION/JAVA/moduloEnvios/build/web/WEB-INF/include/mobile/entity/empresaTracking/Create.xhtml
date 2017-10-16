@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="EmpresaTrackingCreatePage" lazy="true">
+        <pm:header title="#{db12017.CreateEmpresaTrackingTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:EmpresaTrackingListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="EmpresaTrackingCreateForm">
+
+                <h:panelGroup id="display" rendered="#{empresaTrackingController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateEmpresaTrackingLabel_codEmpresaTracking}" for="codEmpresaTracking" />
+                            <p:inputText id="codEmpresaTracking" value="#{empresaTrackingController.selected.codEmpresaTracking}" title="#{db12017.CreateEmpresaTrackingTitle_codEmpresaTracking}" required="true" requiredMessage="#{db12017.CreateEmpresaTrackingRequiredMessage_codEmpresaTracking}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateEmpresaTrackingLabel_nombreEmpresaTracking}" for="nombreEmpresaTracking" />
+                            <p:inputText id="nombreEmpresaTracking" value="#{empresaTrackingController.selected.nombreEmpresaTracking}" title="#{db12017.CreateEmpresaTrackingTitle_nombreEmpresaTracking}" size="200" maxlength="200"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateEmpresaTrackingLabel_trackingCodTracking}" for="trackingCodTracking" />
+                            <p:inputText id="trackingCodTracking" value="#{empresaTrackingController.selected.trackingCodTracking}" title="#{db12017.CreateEmpresaTrackingTitle_trackingCodTracking}" required="true" requiredMessage="#{db12017.CreateEmpresaTrackingRequiredMessage_trackingCodTracking}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{empresaTrackingController.saveNew}" value="#{db12017.Save}" update="display,:EmpresaTrackingListPage:EmpresaTrackingListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:EmpresaTrackingListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

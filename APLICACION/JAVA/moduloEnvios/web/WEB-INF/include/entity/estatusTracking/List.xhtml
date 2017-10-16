@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="EstatusTrackingListForm">
+
+        <p:panel header="#{db12017.ListEstatusTrackingTitle}">
+            <p:contextMenu id="EstatusTrackingDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{db12017.Create}" onclick="document.getElementById('EstatusTrackingListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{db12017.View}" onclick="document.getElementById('EstatusTrackingListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{db12017.Edit}" onclick="document.getElementById('EstatusTrackingListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{db12017.Delete}" onclick="document.getElementById('EstatusTrackingListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{db12017.EstatusTrackingMenuItem_trackingCodTracking}" icon="ui-icon-search"  actionListener="#{estatusTrackingController.prepareTrackingCodTracking}" update=":TrackingViewForm" oncomplete="PF('TrackingViewDialog').show()" disabled="#{empty estatusTrackingController.selected.trackingCodTracking}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{estatusTrackingController.items}"
+                         lazy="false"
+                         rowKey="#{item.codEstatusTracking}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{estatusTrackingController.selected}"
+                         filteredValue="#{estatusTrackingController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{estatusTrackingController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.codEstatusTracking}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:EstatusTrackingDataTableContextMenu" listener="#{estatusTrackingController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:EstatusTrackingDataTableContextMenu" listener="#{estatusTrackingController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{estatusTrackingController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('EstatusTrackingListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.codEstatusTracking}" filterBy="#{item.codEstatusTracking}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListEstatusTrackingTitle_codEstatusTracking}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codEstatusTracking}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.descriEstatusTracking}" filterBy="#{item.descriEstatusTracking}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListEstatusTrackingTitle_descriEstatusTracking}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.descriEstatusTracking}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.trackingCodTracking.codTracking}" filterBy="#{item.trackingCodTracking.codTracking}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListEstatusTrackingTitle_trackingCodTracking}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.trackingCodTracking.codTracking}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{db12017.Create}" actionListener="#{estatusTrackingController.prepareCreate}" update=":EstatusTrackingCreateForm" oncomplete="PF('EstatusTrackingCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{db12017.View}" update=":EstatusTrackingViewForm" oncomplete="PF('EstatusTrackingViewDialog').show()" disabled="#{empty estatusTrackingController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{db12017.Edit}" update=":EstatusTrackingEditForm" oncomplete="PF('EstatusTrackingEditDialog').show()" disabled="#{empty estatusTrackingController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{db12017.Delete}" actionListener="#{estatusTrackingController.delete}" update=":growl,datalist" disabled="#{empty estatusTrackingController.selected}">
+                <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

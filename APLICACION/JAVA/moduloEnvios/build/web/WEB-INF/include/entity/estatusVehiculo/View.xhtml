@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstatusVehiculoViewDlg" widgetVar="EstatusVehiculoViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.ViewEstatusVehiculoTitle}" closeOnEscape="true">
+
+            <h:form id="EstatusVehiculoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{estatusVehiculoController.selected != null}">
+
+                        <h:outputText value="#{db12017.ViewEstatusVehiculoLabel_estatusVehiculo}"/>
+                        <h:outputText value="#{estatusVehiculoController.selected.estatusVehiculo}" title="#{db12017.ViewEstatusVehiculoTitle_estatusVehiculo}"/>
+
+                        <h:outputText value="#{db12017.ViewEstatusVehiculoLabel_descriEstatusVehiculo}"/>
+                        <h:outputText value="#{estatusVehiculoController.selected.descriEstatusVehiculo}" title="#{db12017.ViewEstatusVehiculoTitle_descriEstatusVehiculo}"/>
+
+                        <h:outputText value="#{db12017.ViewEstatusVehiculoLabel_vehiculoCodVehiculo}"/>
+                        <h:outputText value="#{estatusVehiculoController.selected.vehiculoCodVehiculo.codVehiculo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{db12017.Close}" onclick="PF('EstatusVehiculoViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

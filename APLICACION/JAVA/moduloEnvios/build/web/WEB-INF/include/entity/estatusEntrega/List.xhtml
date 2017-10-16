@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="EstatusEntregaListForm">
+
+        <p:panel header="#{db12017.ListEstatusEntregaTitle}">
+            <p:contextMenu id="EstatusEntregaDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{db12017.Create}" onclick="document.getElementById('EstatusEntregaListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{db12017.View}" onclick="document.getElementById('EstatusEntregaListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{db12017.Edit}" onclick="document.getElementById('EstatusEntregaListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{db12017.Delete}" onclick="document.getElementById('EstatusEntregaListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{db12017.EstatusEntregaMenuItem_entregaCodEntrega}" icon="ui-icon-search"  actionListener="#{estatusEntregaController.prepareEntregaCodEntrega}" update=":EntregaViewForm" oncomplete="PF('EntregaViewDialog').show()" disabled="#{empty estatusEntregaController.selected.entregaCodEntrega}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{estatusEntregaController.items}"
+                         lazy="false"
+                         rowKey="#{item.estatusEntrega}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{estatusEntregaController.selected}"
+                         filteredValue="#{estatusEntregaController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{estatusEntregaController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.estatusEntrega}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:EstatusEntregaDataTableContextMenu" listener="#{estatusEntregaController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:EstatusEntregaDataTableContextMenu" listener="#{estatusEntregaController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{estatusEntregaController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('EstatusEntregaListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.estatusEntrega}" filterBy="#{item.estatusEntrega}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListEstatusEntregaTitle_estatusEntrega}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.estatusEntrega}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.descriEstatusEntrega}" filterBy="#{item.descriEstatusEntrega}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListEstatusEntregaTitle_descriEstatusEntrega}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.descriEstatusEntrega}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.entregaCodEntrega.codEntrega}" filterBy="#{item.entregaCodEntrega.codEntrega}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListEstatusEntregaTitle_entregaCodEntrega}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.entregaCodEntrega.codEntrega}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{db12017.Create}" actionListener="#{estatusEntregaController.prepareCreate}" update=":EstatusEntregaCreateForm" oncomplete="PF('EstatusEntregaCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{db12017.View}" update=":EstatusEntregaViewForm" oncomplete="PF('EstatusEntregaViewDialog').show()" disabled="#{empty estatusEntregaController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{db12017.Edit}" update=":EstatusEntregaEditForm" oncomplete="PF('EstatusEntregaEditDialog').show()" disabled="#{empty estatusEntregaController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{db12017.Delete}" actionListener="#{estatusEntregaController.delete}" update=":growl,datalist" disabled="#{empty estatusEntregaController.selected}">
+                <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

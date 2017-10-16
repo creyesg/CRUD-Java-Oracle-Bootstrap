@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TrackingViewDlg" widgetVar="TrackingViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.ViewTrackingTitle}" closeOnEscape="true">
+
+            <h:form id="TrackingViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{trackingController.selected != null}">
+
+                        <h:outputText value="#{db12017.ViewTrackingLabel_codTracking}"/>
+                        <h:outputText value="#{trackingController.selected.codTracking}" title="#{db12017.ViewTrackingTitle_codTracking}"/>
+
+                        <h:outputText value="#{db12017.ViewTrackingLabel_codEmpresaTracking}"/>
+                        <h:outputText value="#{trackingController.selected.codEmpresaTracking}" title="#{db12017.ViewTrackingTitle_codEmpresaTracking}"/>
+
+                        <h:outputText value="#{db12017.ViewTrackingLabel_codPaisTracking}"/>
+                        <h:outputText value="#{trackingController.selected.codPaisTracking}" title="#{db12017.ViewTrackingTitle_codPaisTracking}"/>
+
+                        <h:outputText value="#{db12017.ViewTrackingLabel_codEstatusTracking}"/>
+                        <h:outputText value="#{trackingController.selected.codEstatusTracking}" title="#{db12017.ViewTrackingTitle_codEstatusTracking}"/>
+
+                        <h:outputText value="#{db12017.ViewTrackingLabel_numeroHojaDespacho}"/>
+                        <h:outputText value="#{trackingController.selected.numeroHojaDespacho}" title="#{db12017.ViewTrackingTitle_numeroHojaDespacho}"/>
+
+                        <h:outputText value="#{db12017.ViewTrackingLabel_envios}"/>
+                        <h:outputText value="#{trackingController.selected.envios.descripcion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{db12017.Close}" onclick="PF('TrackingViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <h:form id="menuForm">
+        <p:menu>
+            <p:submenu label="#{db12017.Maintenance}">
+                <p:menuitem value="#{db12017.DespachoHeading}..." outcome="/mobile/despacho/index" />
+                <p:menuitem value="#{db12017.DireccionesEntregasHeading}..." outcome="/mobile/direccionesEntregas/index" />
+                <p:menuitem value="#{db12017.EmpresaTrackingHeading}..." outcome="/mobile/empresaTracking/index" />
+                <p:menuitem value="#{db12017.EntregaHeading}..." outcome="/mobile/entrega/index" />
+                <p:menuitem value="#{db12017.EnviosHeading}..." outcome="/mobile/envios/index" />
+                <p:menuitem value="#{db12017.EstatusDespachoHeading}..." outcome="/mobile/estatusDespacho/index" />
+                <p:menuitem value="#{db12017.EstatusEntregaHeading}..." outcome="/mobile/estatusEntrega/index" />
+                <p:menuitem value="#{db12017.EstatusMensajeroHeading}..." outcome="/mobile/estatusMensajero/index" />
+                <p:menuitem value="#{db12017.EstatusPaqueteHeading}..." outcome="/mobile/estatusPaquete/index" />
+                <p:menuitem value="#{db12017.EstatusTrackingHeading}..." outcome="/mobile/estatusTracking/index" />
+                <p:menuitem value="#{db12017.EstatusVehiculoHeading}..." outcome="/mobile/estatusVehiculo/index" />
+                <p:menuitem value="#{db12017.MensajerosHeading}..." outcome="/mobile/mensajeros/index" />
+                <p:menuitem value="#{db12017.PaisEmpresaTrackingHeading}..." outcome="/mobile/paisEmpresaTracking/index" />
+                <p:menuitem value="#{db12017.PaqueteHeading}..." outcome="/mobile/paquete/index" />
+                <p:menuitem value="#{db12017.TipoVehiculoHeading}..." outcome="/mobile/tipoVehiculo/index" />
+                <p:menuitem value="#{db12017.TrackingHeading}..." outcome="/mobile/tracking/index" />
+                <p:menuitem value="#{db12017.VehiculoHeading}..." outcome="/mobile/vehiculo/index" />
+            </p:submenu>
+            <p:menuitem value="#{db12017.FullApp}" outcome="/index" icon="ui-icon-home"/>
+        </p:menu>
+    </h:form>
+</ui:composition>

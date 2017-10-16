@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="TipoVehiculoViewPage" lazy="true">
+        <pm:header title="#{db12017.ViewTipoVehiculoTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:TipoVehiculoListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="TipoVehiculoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{tipoVehiculoController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewTipoVehiculoLabel_tipoVehiculo}"/>
+                            <h:outputText value="#{tipoVehiculoController.selected.tipoVehiculo}" title="#{db12017.ViewTipoVehiculoTitle_tipoVehiculo}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewTipoVehiculoLabel_descriTipoVehiculo}"/>
+                            <h:outputText value="#{tipoVehiculoController.selected.descriTipoVehiculo}" title="#{db12017.ViewTipoVehiculoTitle_descriTipoVehiculo}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewTipoVehiculoLabel_vehiculoCodVehiculo}"/>
+                            <h:outputText value="#{tipoVehiculoController.selected.vehiculoCodVehiculo.codVehiculo}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

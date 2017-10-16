@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EntregaCreateDlg" widgetVar="EntregaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{db12017.CreateEntregaTitle}" closeOnEscape="true">
+
+            <h:form id="EntregaCreateForm">
+
+                <h:panelGroup id="display" rendered="#{entregaController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{db12017.CreateEntregaLabel_codEntrega}" for="codEntrega" />
+                        <p:inputText id="codEntrega" value="#{entregaController.selected.codEntrega}" title="#{db12017.CreateEntregaTitle_codEntrega}" required="true" requiredMessage="#{db12017.CreateEntregaRequiredMessage_codEntrega}"/>
+
+                        <p:outputLabel value="#{db12017.CreateEntregaLabel_numeroHojaDespacho}" for="numeroHojaDespacho" />
+                        <p:inputText id="numeroHojaDespacho" value="#{entregaController.selected.numeroHojaDespacho}" title="#{db12017.CreateEntregaTitle_numeroHojaDespacho}" required="true" requiredMessage="#{db12017.CreateEntregaRequiredMessage_numeroHojaDespacho}"/>
+
+                        <p:outputLabel value="#{db12017.CreateEntregaLabel_fechaEntrega}" for="fechaEntrega" />
+                        <p:calendar id="fechaEntrega" pattern="MM/dd/yyyy HH:mm:ss" value="#{entregaController.selected.fechaEntrega}" title="#{db12017.CreateEntregaTitle_fechaEntrega}"  showOn="button"/>
+
+                        <p:outputLabel value="#{db12017.CreateEntregaLabel_direccionEntrega}" for="direccionEntrega" />
+                        <p:inputText id="direccionEntrega" value="#{entregaController.selected.direccionEntrega}" title="#{db12017.CreateEntregaTitle_direccionEntrega}" required="true" requiredMessage="#{db12017.CreateEntregaRequiredMessage_direccionEntrega}" size="200" maxlength="200"/>
+
+                        <p:outputLabel value="#{db12017.CreateEntregaLabel_nombreEntrega}" for="nombreEntrega" />
+                        <p:inputText id="nombreEntrega" value="#{entregaController.selected.nombreEntrega}" title="#{db12017.CreateEntregaTitle_nombreEntrega}" required="true" requiredMessage="#{db12017.CreateEntregaRequiredMessage_nombreEntrega}" size="200" maxlength="200"/>
+
+                        <p:outputLabel value="#{db12017.CreateEntregaLabel_estatusEntrega}" for="estatusEntrega" />
+                        <p:inputText id="estatusEntrega" value="#{entregaController.selected.estatusEntrega}" title="#{db12017.CreateEntregaTitle_estatusEntrega}" required="true" requiredMessage="#{db12017.CreateEntregaRequiredMessage_estatusEntrega}"/>
+
+                        <p:outputLabel value="#{db12017.CreateEntregaLabel_usuarioEntrega}" for="usuarioEntrega" />
+                        <p:inputText id="usuarioEntrega" value="#{entregaController.selected.usuarioEntrega}" title="#{db12017.CreateEntregaTitle_usuarioEntrega}" required="true" requiredMessage="#{db12017.CreateEntregaRequiredMessage_usuarioEntrega}" size="200" maxlength="200"/>
+
+                        <p:outputLabel value="#{db12017.CreateEntregaLabel_envios}" for="envios" />
+                        <p:selectOneMenu id="envios" value="#{entregaController.selected.envios}" required="true" requiredMessage="#{db12017.CreateEntregaRequiredMessage_envios}" converter="enviosConverter">
+                            <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                            <f:selectItems value="#{enviosController.items}"
+                                           var="enviosItem"
+                                           itemValue="#{enviosItem}"
+                                           itemLabel="#{enviosItem.descripcion.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{entregaController.saveNew}" value="#{db12017.Save}" update="display,:EntregaListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EntregaCreateDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('EntregaCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

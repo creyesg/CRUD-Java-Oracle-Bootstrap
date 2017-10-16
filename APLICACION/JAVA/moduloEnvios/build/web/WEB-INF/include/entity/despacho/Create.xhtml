@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DespachoCreateDlg" widgetVar="DespachoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{db12017.CreateDespachoTitle}" closeOnEscape="true">
+
+            <h:form id="DespachoCreateForm">
+
+                <h:panelGroup id="display" rendered="#{despachoController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{db12017.CreateDespachoLabel_codDespacho}" for="codDespacho" />
+                        <p:inputText id="codDespacho" value="#{despachoController.selected.codDespacho}" title="#{db12017.CreateDespachoTitle_codDespacho}" required="true" requiredMessage="#{db12017.CreateDespachoRequiredMessage_codDespacho}"/>
+
+                        <p:outputLabel value="#{db12017.CreateDespachoLabel_codPaquete}" for="codPaquete" />
+                        <p:inputText id="codPaquete" value="#{despachoController.selected.codPaquete}" title="#{db12017.CreateDespachoTitle_codPaquete}" required="true" requiredMessage="#{db12017.CreateDespachoRequiredMessage_codPaquete}"/>
+
+                        <p:outputLabel value="#{db12017.CreateDespachoLabel_fechaDespacho}" for="fechaDespacho" />
+                        <p:calendar id="fechaDespacho" pattern="MM/dd/yyyy HH:mm:ss" value="#{despachoController.selected.fechaDespacho}" title="#{db12017.CreateDespachoTitle_fechaDespacho}"  showOn="button"/>
+
+                        <p:outputLabel value="#{db12017.CreateDespachoLabel_numeroHojaDespacho}" for="numeroHojaDespacho" />
+                        <p:inputText id="numeroHojaDespacho" value="#{despachoController.selected.numeroHojaDespacho}" title="#{db12017.CreateDespachoTitle_numeroHojaDespacho}"/>
+
+                        <p:outputLabel value="#{db12017.CreateDespachoLabel_usuarioDespacho}" for="usuarioDespacho" />
+                        <p:inputText id="usuarioDespacho" value="#{despachoController.selected.usuarioDespacho}" title="#{db12017.CreateDespachoTitle_usuarioDespacho}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{db12017.CreateDespachoLabel_idEstatusDespacho}" for="idEstatusDespacho" />
+                        <p:inputText id="idEstatusDespacho" value="#{despachoController.selected.idEstatusDespacho}" title="#{db12017.CreateDespachoTitle_idEstatusDespacho}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{despachoController.saveNew}" value="#{db12017.Save}" update="display,:DespachoListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('DespachoCreateDialog'));">
+                        <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{db12017.Cancel}" oncomplete="PF('DespachoCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

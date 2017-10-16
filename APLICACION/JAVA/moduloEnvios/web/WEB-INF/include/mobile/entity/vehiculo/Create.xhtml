@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="VehiculoCreatePage" lazy="true">
+        <pm:header title="#{db12017.CreateVehiculoTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:VehiculoListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="VehiculoCreateForm">
+
+                <h:panelGroup id="display" rendered="#{vehiculoController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateVehiculoLabel_codVehiculo}" for="codVehiculo" />
+                            <p:inputText id="codVehiculo" value="#{vehiculoController.selected.codVehiculo}" title="#{db12017.CreateVehiculoTitle_codVehiculo}" required="true" requiredMessage="#{db12017.CreateVehiculoRequiredMessage_codVehiculo}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateVehiculoLabel_tipoVehiculo}" for="tipoVehiculo" />
+                            <p:inputText id="tipoVehiculo" value="#{vehiculoController.selected.tipoVehiculo}" title="#{db12017.CreateVehiculoTitle_tipoVehiculo}" required="true" requiredMessage="#{db12017.CreateVehiculoRequiredMessage_tipoVehiculo}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateVehiculoLabel_codPaquete}" for="codPaquete" />
+                            <p:inputText id="codPaquete" value="#{vehiculoController.selected.codPaquete}" title="#{db12017.CreateVehiculoTitle_codPaquete}" required="true" requiredMessage="#{db12017.CreateVehiculoRequiredMessage_codPaquete}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateVehiculoLabel_codMensajero}" for="codMensajero" />
+                            <p:inputText id="codMensajero" value="#{vehiculoController.selected.codMensajero}" title="#{db12017.CreateVehiculoTitle_codMensajero}" required="true" requiredMessage="#{db12017.CreateVehiculoRequiredMessage_codMensajero}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateVehiculoLabel_estatusVehiculo}" for="estatusVehiculo" />
+                            <p:inputText id="estatusVehiculo" value="#{vehiculoController.selected.estatusVehiculo}" title="#{db12017.CreateVehiculoTitle_estatusVehiculo}" required="true" requiredMessage="#{db12017.CreateVehiculoRequiredMessage_estatusVehiculo}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreateVehiculoLabel_paqueteCodPaquete}" for="paqueteCodPaquete" />
+                            <p:selectOneMenu id="paqueteCodPaquete" value="#{vehiculoController.selected.paqueteCodPaquete}" required="true" requiredMessage="#{db12017.CreateVehiculoRequiredMessage_paqueteCodPaquete}" converter="paqueteConverter">
+                                <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                                <f:selectItems value="#{paqueteController.items}"
+                                               var="paqueteCodPaqueteItem"
+                                               itemValue="#{paqueteCodPaqueteItem}"
+                                               itemLabel="#{paqueteCodPaqueteItem.codPaquete.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{vehiculoController.saveNew}" value="#{db12017.Save}" update="display,:VehiculoListPage:VehiculoListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:VehiculoListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

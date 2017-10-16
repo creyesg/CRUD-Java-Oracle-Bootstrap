@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="VehiculoListForm">
+
+        <p:panel header="#{db12017.ListVehiculoTitle}">
+            <p:contextMenu id="VehiculoDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{db12017.Create}" onclick="document.getElementById('VehiculoListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{db12017.View}" onclick="document.getElementById('VehiculoListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{db12017.Edit}" onclick="document.getElementById('VehiculoListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{db12017.Delete}" onclick="document.getElementById('VehiculoListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{db12017.VehiculoMenuItem_estatusVehiculoCollection}" icon="ui-icon-search"  action="#{vehiculoController.navigateEstatusVehiculoCollection}" disabled="#{vehiculoController.isEstatusVehiculoCollectionEmpty}" ajax="false"/>  
+                <p:menuitem value="#{db12017.VehiculoMenuItem_tipoVehiculoCollection}" icon="ui-icon-search"  action="#{vehiculoController.navigateTipoVehiculoCollection}" disabled="#{vehiculoController.isTipoVehiculoCollectionEmpty}" ajax="false"/>  
+                <p:menuitem value="#{db12017.VehiculoMenuItem_paqueteCodPaquete}" icon="ui-icon-search"  actionListener="#{vehiculoController.preparePaqueteCodPaquete}" update=":PaqueteViewForm" oncomplete="PF('PaqueteViewDialog').show()" disabled="#{empty vehiculoController.selected.paqueteCodPaquete}"/>  
+                <p:menuitem value="#{db12017.VehiculoMenuItem_mensajerosCollection}" icon="ui-icon-search"  action="#{vehiculoController.navigateMensajerosCollection}" disabled="#{vehiculoController.isMensajerosCollectionEmpty}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{vehiculoController.items}"
+                         lazy="false"
+                         rowKey="#{item.codVehiculo}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{vehiculoController.selected}"
+                         filteredValue="#{vehiculoController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{vehiculoController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.codVehiculo}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:VehiculoDataTableContextMenu" listener="#{vehiculoController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:VehiculoDataTableContextMenu" listener="#{vehiculoController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{vehiculoController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('VehiculoListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.codVehiculo}" filterBy="#{item.codVehiculo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListVehiculoTitle_codVehiculo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codVehiculo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.tipoVehiculo}" filterBy="#{item.tipoVehiculo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListVehiculoTitle_tipoVehiculo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.tipoVehiculo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.codPaquete}" filterBy="#{item.codPaquete}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListVehiculoTitle_codPaquete}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codPaquete}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.codMensajero}" filterBy="#{item.codMensajero}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListVehiculoTitle_codMensajero}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codMensajero}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.estatusVehiculo}" filterBy="#{item.estatusVehiculo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListVehiculoTitle_estatusVehiculo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.estatusVehiculo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.paqueteCodPaquete.codPaquete}" filterBy="#{item.paqueteCodPaquete.codPaquete}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListVehiculoTitle_paqueteCodPaquete}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.paqueteCodPaquete.codPaquete}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{db12017.Create}" actionListener="#{vehiculoController.prepareCreate}" update=":VehiculoCreateForm" oncomplete="PF('VehiculoCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{db12017.View}" update=":VehiculoViewForm" oncomplete="PF('VehiculoViewDialog').show()" disabled="#{empty vehiculoController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{db12017.Edit}" update=":VehiculoEditForm" oncomplete="PF('VehiculoEditDialog').show()" disabled="#{empty vehiculoController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{db12017.Delete}" actionListener="#{vehiculoController.delete}" update=":growl,datalist" disabled="#{empty vehiculoController.selected}">
+                <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="MensajerosViewPage" lazy="true">
+        <pm:header title="#{db12017.ViewMensajerosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:MensajerosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="MensajerosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{mensajerosController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewMensajerosLabel_codMensajero}"/>
+                            <h:outputText value="#{mensajerosController.selected.codMensajero}" title="#{db12017.ViewMensajerosTitle_codMensajero}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewMensajerosLabel_primerNombreMensajero}"/>
+                            <h:outputText value="#{mensajerosController.selected.primerNombreMensajero}" title="#{db12017.ViewMensajerosTitle_primerNombreMensajero}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewMensajerosLabel_segundoNombreMensajero}"/>
+                            <h:outputText value="#{mensajerosController.selected.segundoNombreMensajero}" title="#{db12017.ViewMensajerosTitle_segundoNombreMensajero}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewMensajerosLabel_primerApellidoMensajero}"/>
+                            <h:outputText value="#{mensajerosController.selected.primerApellidoMensajero}" title="#{db12017.ViewMensajerosTitle_primerApellidoMensajero}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewMensajerosLabel_segundoApellidoMensajero}"/>
+                            <h:outputText value="#{mensajerosController.selected.segundoApellidoMensajero}" title="#{db12017.ViewMensajerosTitle_segundoApellidoMensajero}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewMensajerosLabel_estatusMensajero}"/>
+                            <h:outputText value="#{mensajerosController.selected.estatusMensajero}" title="#{db12017.ViewMensajerosTitle_estatusMensajero}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewMensajerosLabel_vehiculoCodVehiculo}"/>
+                            <h:outputText value="#{mensajerosController.selected.vehiculoCodVehiculo.codVehiculo}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

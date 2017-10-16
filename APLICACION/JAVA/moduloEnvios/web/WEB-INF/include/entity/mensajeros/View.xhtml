@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MensajerosViewDlg" widgetVar="MensajerosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{db12017.ViewMensajerosTitle}" closeOnEscape="true">
+
+            <h:form id="MensajerosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{mensajerosController.selected != null}">
+
+                        <h:outputText value="#{db12017.ViewMensajerosLabel_codMensajero}"/>
+                        <h:outputText value="#{mensajerosController.selected.codMensajero}" title="#{db12017.ViewMensajerosTitle_codMensajero}"/>
+
+                        <h:outputText value="#{db12017.ViewMensajerosLabel_primerNombreMensajero}"/>
+                        <h:outputText value="#{mensajerosController.selected.primerNombreMensajero}" title="#{db12017.ViewMensajerosTitle_primerNombreMensajero}"/>
+
+                        <h:outputText value="#{db12017.ViewMensajerosLabel_segundoNombreMensajero}"/>
+                        <h:outputText value="#{mensajerosController.selected.segundoNombreMensajero}" title="#{db12017.ViewMensajerosTitle_segundoNombreMensajero}"/>
+
+                        <h:outputText value="#{db12017.ViewMensajerosLabel_primerApellidoMensajero}"/>
+                        <h:outputText value="#{mensajerosController.selected.primerApellidoMensajero}" title="#{db12017.ViewMensajerosTitle_primerApellidoMensajero}"/>
+
+                        <h:outputText value="#{db12017.ViewMensajerosLabel_segundoApellidoMensajero}"/>
+                        <h:outputText value="#{mensajerosController.selected.segundoApellidoMensajero}" title="#{db12017.ViewMensajerosTitle_segundoApellidoMensajero}"/>
+
+                        <h:outputText value="#{db12017.ViewMensajerosLabel_estatusMensajero}"/>
+                        <h:outputText value="#{mensajerosController.selected.estatusMensajero}" title="#{db12017.ViewMensajerosTitle_estatusMensajero}"/>
+
+                        <h:outputText value="#{db12017.ViewMensajerosLabel_vehiculoCodVehiculo}"/>
+                        <h:outputText value="#{mensajerosController.selected.vehiculoCodVehiculo.codVehiculo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{db12017.Close}" onclick="PF('MensajerosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

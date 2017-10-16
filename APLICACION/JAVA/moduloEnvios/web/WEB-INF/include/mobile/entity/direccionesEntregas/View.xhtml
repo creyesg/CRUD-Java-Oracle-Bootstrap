@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="DireccionesEntregasViewPage" lazy="true">
+        <pm:header title="#{db12017.ViewDireccionesEntregasTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:DireccionesEntregasListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="DireccionesEntregasViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{direccionesEntregasController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDireccionesEntregasLabel_direccionEntrega}"/>
+                            <h:outputText value="#{direccionesEntregasController.selected.direccionEntrega}" title="#{db12017.ViewDireccionesEntregasTitle_direccionEntrega}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDireccionesEntregasLabel_calle}"/>
+                            <h:outputText value="#{direccionesEntregasController.selected.calle}" title="#{db12017.ViewDireccionesEntregasTitle_calle}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDireccionesEntregasLabel_avenida}"/>
+                            <h:outputText value="#{direccionesEntregasController.selected.avenida}" title="#{db12017.ViewDireccionesEntregasTitle_avenida}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDireccionesEntregasLabel_noVivienda}"/>
+                            <h:outputText value="#{direccionesEntregasController.selected.noVivienda}" title="#{db12017.ViewDireccionesEntregasTitle_noVivienda}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDireccionesEntregasLabel_zona}"/>
+                            <h:outputText value="#{direccionesEntregasController.selected.zona}" title="#{db12017.ViewDireccionesEntregasTitle_zona}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDireccionesEntregasLabel_provincia}"/>
+                            <h:outputText value="#{direccionesEntregasController.selected.provincia}" title="#{db12017.ViewDireccionesEntregasTitle_provincia}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDireccionesEntregasLabel_municipio}"/>
+                            <h:outputText value="#{direccionesEntregasController.selected.municipio}" title="#{db12017.ViewDireccionesEntregasTitle_municipio}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDireccionesEntregasLabel_pais}"/>
+                            <h:outputText value="#{direccionesEntregasController.selected.pais}" title="#{db12017.ViewDireccionesEntregasTitle_pais}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDireccionesEntregasLabel_codEntrega}"/>
+                            <h:outputText value="#{direccionesEntregasController.selected.codEntrega}" title="#{db12017.ViewDireccionesEntregasTitle_codEntrega}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDireccionesEntregasLabel_entregaCodEntrega}"/>
+                            <h:outputText value="#{direccionesEntregasController.selected.entregaCodEntrega.codEntrega}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

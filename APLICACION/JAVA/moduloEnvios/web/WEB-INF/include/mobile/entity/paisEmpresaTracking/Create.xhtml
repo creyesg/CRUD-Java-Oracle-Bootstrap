@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="PaisEmpresaTrackingCreatePage" lazy="true">
+        <pm:header title="#{db12017.CreatePaisEmpresaTrackingTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:PaisEmpresaTrackingListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="PaisEmpresaTrackingCreateForm">
+
+                <h:panelGroup id="display" rendered="#{paisEmpresaTrackingController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreatePaisEmpresaTrackingLabel_codPaisTracking}" for="codPaisTracking" />
+                            <p:inputText id="codPaisTracking" value="#{paisEmpresaTrackingController.selected.codPaisTracking}" title="#{db12017.CreatePaisEmpresaTrackingTitle_codPaisTracking}" required="true" requiredMessage="#{db12017.CreatePaisEmpresaTrackingRequiredMessage_codPaisTracking}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreatePaisEmpresaTrackingLabel_descripcionPais}" for="descripcionPais" />
+                            <p:inputText id="descripcionPais" value="#{paisEmpresaTrackingController.selected.descripcionPais}" title="#{db12017.CreatePaisEmpresaTrackingTitle_descripcionPais}" size="200" maxlength="200"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{db12017.CreatePaisEmpresaTrackingLabel_trackingCodTracking}" for="trackingCodTracking" />
+                            <p:selectOneMenu id="trackingCodTracking" value="#{paisEmpresaTrackingController.selected.trackingCodTracking}" required="true" requiredMessage="#{db12017.CreatePaisEmpresaTrackingRequiredMessage_trackingCodTracking}" converter="trackingConverter">
+                                <f:selectItem itemLabel="#{db12017.SelectOneMessage}"/>
+                                <f:selectItems value="#{trackingController.items}"
+                                               var="trackingCodTrackingItem"
+                                               itemValue="#{trackingCodTrackingItem}"
+                                               itemLabel="#{trackingCodTrackingItem.codTracking.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{paisEmpresaTrackingController.saveNew}" value="#{db12017.Save}" update="display,:PaisEmpresaTrackingListPage:PaisEmpresaTrackingListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:PaisEmpresaTrackingListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="DireccionesEntregasListForm">
+
+        <p:panel header="#{db12017.ListDireccionesEntregasTitle}">
+            <p:contextMenu id="DireccionesEntregasDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{db12017.Create}" onclick="document.getElementById('DireccionesEntregasListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{db12017.View}" onclick="document.getElementById('DireccionesEntregasListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{db12017.Edit}" onclick="document.getElementById('DireccionesEntregasListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{db12017.Delete}" onclick="document.getElementById('DireccionesEntregasListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{db12017.DireccionesEntregasMenuItem_entregaCodEntrega}" icon="ui-icon-search"  actionListener="#{direccionesEntregasController.prepareEntregaCodEntrega}" update=":EntregaViewForm" oncomplete="PF('EntregaViewDialog').show()" disabled="#{empty direccionesEntregasController.selected.entregaCodEntrega}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{direccionesEntregasController.items}"
+                         lazy="false"
+                         rowKey="#{item.direccionEntrega}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{direccionesEntregasController.selected}"
+                         filteredValue="#{direccionesEntregasController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{direccionesEntregasController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.direccionEntrega}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:DireccionesEntregasDataTableContextMenu" listener="#{direccionesEntregasController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:DireccionesEntregasDataTableContextMenu" listener="#{direccionesEntregasController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{direccionesEntregasController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('DireccionesEntregasListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.direccionEntrega}" filterBy="#{item.direccionEntrega}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListDireccionesEntregasTitle_direccionEntrega}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.direccionEntrega}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.calle}" filterBy="#{item.calle}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListDireccionesEntregasTitle_calle}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.calle}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.avenida}" filterBy="#{item.avenida}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListDireccionesEntregasTitle_avenida}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.avenida}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.noVivienda}" filterBy="#{item.noVivienda}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListDireccionesEntregasTitle_noVivienda}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.noVivienda}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.zona}" filterBy="#{item.zona}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListDireccionesEntregasTitle_zona}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.zona}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.provincia}" filterBy="#{item.provincia}">
+                    <f:facet name="header">
+                        <h:outputText value="#{db12017.ListDireccionesEntregasTitle_provincia}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.provincia}"/>
+                </p:column>
+
+                <ui:remove>
+                    <p:column sortBy="#{item.municipio}" filterBy="#{item.municipio}">
+                        <f:facet name="header">
+                            <h:outputText value="#{db12017.ListDireccionesEntregasTitle_municipio}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.municipio}"/>
+                    </p:column>
+                </ui:remove>
+                <ui:remove>
+                    <p:column sortBy="#{item.pais}" filterBy="#{item.pais}">
+                        <f:facet name="header">
+                            <h:outputText value="#{db12017.ListDireccionesEntregasTitle_pais}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.pais}"/>
+                    </p:column>
+                </ui:remove>
+                <ui:remove>
+                    <p:column sortBy="#{item.codEntrega}" filterBy="#{item.codEntrega}">
+                        <f:facet name="header">
+                            <h:outputText value="#{db12017.ListDireccionesEntregasTitle_codEntrega}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.codEntrega}"/>
+                    </p:column>
+                </ui:remove>
+                <ui:remove>
+                    <p:column sortBy="#{item.entregaCodEntrega.codEntrega}" filterBy="#{item.entregaCodEntrega.codEntrega}">
+                        <f:facet name="header">
+                            <h:outputText value="#{db12017.ListDireccionesEntregasTitle_entregaCodEntrega}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.entregaCodEntrega.codEntrega}"/>
+                    </p:column>
+                </ui:remove>
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{db12017.Create}" actionListener="#{direccionesEntregasController.prepareCreate}" update=":DireccionesEntregasCreateForm" oncomplete="PF('DireccionesEntregasCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{db12017.View}" update=":DireccionesEntregasViewForm" oncomplete="PF('DireccionesEntregasViewDialog').show()" disabled="#{empty direccionesEntregasController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{db12017.Edit}" update=":DireccionesEntregasEditForm" oncomplete="PF('DireccionesEntregasEditDialog').show()" disabled="#{empty direccionesEntregasController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{db12017.Delete}" actionListener="#{direccionesEntregasController.delete}" update=":growl,datalist" disabled="#{empty direccionesEntregasController.selected}">
+                <p:confirm header="#{db12017.ConfirmationHeader}" message="#{db12017.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

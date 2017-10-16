@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="DER.png" id="6448AA20-BAEF-4DE9-8C54-28E2F7D50916" version="3.5">
+<createdBy>javier</createdBy>
+<createdTime>2017-08-31 03:00:16 UTC</createdTime>
+<ownerDesignName>DER.png</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>6448AA20-BAEF-4DE9-8C54-28E2F7D50916</designId>
+</OSDM_Design>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="DespachoViewPage" lazy="true">
+        <pm:header title="#{db12017.ViewDespachoTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{db12017.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:DespachoListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="DespachoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{despachoController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDespachoLabel_codDespacho}"/>
+                            <h:outputText value="#{despachoController.selected.codDespacho}" title="#{db12017.ViewDespachoTitle_codDespacho}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDespachoLabel_codPaquete}"/>
+                            <h:outputText value="#{despachoController.selected.codPaquete}" title="#{db12017.ViewDespachoTitle_codPaquete}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDespachoLabel_fechaDespacho}"/>
+                            <h:outputText value="#{despachoController.selected.fechaDespacho}" title="#{db12017.ViewDespachoTitle_fechaDespacho}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDespachoLabel_numeroHojaDespacho}"/>
+                            <h:outputText value="#{despachoController.selected.numeroHojaDespacho}" title="#{db12017.ViewDespachoTitle_numeroHojaDespacho}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDespachoLabel_usuarioDespacho}"/>
+                            <h:outputText value="#{despachoController.selected.usuarioDespacho}" title="#{db12017.ViewDespachoTitle_usuarioDespacho}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{db12017.ViewDespachoLabel_idEstatusDespacho}"/>
+                            <h:outputText value="#{despachoController.selected.idEstatusDespacho}" title="#{db12017.ViewDespachoTitle_idEstatusDespacho}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>
