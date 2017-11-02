@@ -1,0 +1,194 @@
+------------------ 
+OTRA INFORMACION
+--------------------
+
+Ordenes
+- El reporte es del mes de Octubre del 2017
+- Tamanio esta en Mts Cubicos donde la media aprox es de 0.25mts cubicos, ya que son cajas de perfumes
+- Peso esta en Libras
+
+Empresas:
+- Rubros estan en Dollares
+- Tarifa Cobro esta: TariFa cobro X libras
+
+
+------------------
+-----------------
+-----***** SCRIP DE INGRESO DE DATOS ******
+
+
+
+
+
+-- *** 1 - Primero Insertar Status Order ------------
+INSERT INTO STATUS_ORDER VALUES (101,'ACTIVO'); -- 10
+INSERT INTO STATUS_ORDER VALUES (102,'ENTREGADO'); -- 15
+INSERT INTO STATUS_ORDER VALUES (103,'DEVOLUCION'); -- 5
+
+-- ** 2 - Insertar Datos Ordenes ** -----------------
+INSERT INTO ORDERS VALUES (1,'PEDRO','1000-10','Calzada Roosevelt km 14, 6-38 zona 2 de Mixco, colonia El Tesoro','1001',101,TO_DATE('25-10-2017','DD-MM-YYYY'),25.2,1.5);
+INSERT INTO ORDERS VALUES (2,'Francisco Alvarez','1000-10','Calzada Roosevelt km 14, 6-38 zona 2 de Mixco, colonia El Tesoro, Guatemala, Guatemala','1002',101,TO_DATE('23-10-2017','DD-MM-YYYY'),20.3,1.0);
+INSERT INTO ORDERS VALUES (3,'Alvaro Paz','1000-120','Av Bolívar 28-02 Zona 3, Guatemala, Guatemala ','1003',102,TO_DATE('2-10-2017','DD-MM-YYYY'),5.3,0.30);
+INSERT INTO ORDERS VALUES (4,'Saul Torres','1000-30','19 Avenida 8-10 Zona 11 Salvador, San salvador','1004',102,TO_DATE('2-10-2017','DD-MM-YYYY'),20.1,1.5);
+INSERT INTO ORDERS VALUES (5,'Saul Gutierrez','1000-40','Km 258.7 Calz Kaibil Balam Cambote Zona 11 Huehuetenango, Guatemala','1005',102,TO_DATE('1-10-2017','DD-MM-YYYY'),4.1,0.40);
+INSERT INTO ORDERS VALUES (6,'Marlon Arana','1000-50','Calzada Roosevelt 39-77 Zona 11 , Guatemala, Guatemala','1006',102,TO_DATE('1-10-2017','DD-MM-YYYY'),1.5,0.10);
+INSERT INTO ORDERS VALUES (7,'German Perez','1000-60','17 Avenida 25-29 Zona 11 Periférico , Guatemala, Guatemala','1007',101,TO_DATE('15-10-2017','DD-MM-YYYY'),1.6,0.15);
+INSERT INTO ORDERS VALUES (8,'Alejando Torres','1000-70','8 Avenida 28-58 Zona 8 , Guatemala, Guatemala','1008',102,TO_DATE('4-10-2017','DD-MM-YYYY'),2.5,0.30);
+INSERT INTO ORDERS VALUES (9,'Esmeralda Castillo','1000-80','DIAGONAL 17, 30-30 ZONA 11 COLONIA LAS CHARCASS, San, San salvador','1009',102,TO_DATE('5-10-2017','DD-MM-YYYY'),3.0,0.25);
+INSERT INTO ORDERS VALUES (10,'Izabel lopez','1000-60','7 Avenida 29-56 Zona 8, Honduras, Tegucigalpa','1010',103,TO_DATE('20-10-2017','DD-MM-YYYY'),2.0,0.20);
+
+INSERT INTO ORDERS VALUES (11,'Melisa Paiz','1100-11','Calzada San Juan 21-13 Zona 7, San, San salvador','1100',102,TO_DATE('6-10-2017','DD-MM-YYYY'),4.0,0.33);
+INSERT INTO ORDERS VALUES (12,'Gabriela Castillos','1200-12','Cals San Juan 10-75 Z-4 Mixco Col Monte Real , Guatemala, Guatemala','1200',101,TO_DATE('7-10-2017','DD-MM-YYYY'),4.5,0.22);
+INSERT INTO ORDERS VALUES (13,'Alan Brito','1300-31','Calz San Juan 10-18 Z-3 Mixco Col Nueva Montserrat, San, San salvador','1300',102,TO_DATE('8-10-2017','DD-MM-YYYY'),4.6,0.25);
+INSERT INTO ORDERS VALUES (14,'Rolando Motta','1400-23','6 C 20-54 Z-6 , Guatemala, Guatemala','1401',101,TO_DATE('19-10-2017','DD-MM-YYYY'),1.7,0.15);
+INSERT INTO ORDERS VALUES (15,'Armando Paredez','1500-20','2 C 6-56 Z-10 ','1501',102,TO_DATE('10-10-2017','DD-MM-YYYY'),2.1,0.19);
+INSERT INTO ORDERS VALUES (16,'Juan Pinto','1600-611','Km 17 SJosePin L 2 Aldea Don Justo , Guatemala, Guatemala','1601',101,TO_DATE('18-10-2017','DD-MM-YYYY'),3.5,0.37);
+INSERT INTO ORDERS VALUES (17,'Maria Colinas','1711-117','Calz San Juan 10-75 Z 4 Mixco Col. Monte Real, San, San salvador ','1701',101,TO_DATE('14-10-2017','DD-MM-YYYY'),6.0,0.50);
+INSERT INTO ORDERS VALUES (18,'Eliza Juarez','1800-118','6 C 8-300 Z-1 Barrio Las Casas, Coatepeque , Guatemala, Guatemala','1801',102,TO_DATE('1-10-2017','DD-MM-YYYY'),4.9,0.50);
+INSERT INTO ORDERS VALUES (19,'Julia Paiz','1900-911','CARRET INTERAMERICANA KM 30.7 ','1901',101,TO_DATE('25-10-2017','DD-MM-YYYY'),7.11,0.80);
+INSERT INTO ORDERS VALUES (20,'Vanesa Estrada','20000-201','Calzada Roosevelt km 14, 6-38 zona 2 de Mixco, colonia El Tesoro, Honduras, Tegucigalpa','1101',103,TO_DATE('30-10-2017','DD-MM-YYYY'),4.23,0.40);
+
+INSERT INTO ORDERS VALUES (21,'Alan Aquino','9990-111','1 Calle 18-92 Zona 1 , Guatemala, Guatemala','1011',101,TO_DATE('31-10-2017','DD-MM-YYYY'),4.25,0.50);
+INSERT INTO ORDERS VALUES (22,'Robin Estrada','998-10','7 AV 27-22 Z-8, Honduras, Tegucigalpa ','1021',102,TO_DATE('5-10-2017','DD-MM-YYYY'),4.56,0.30);
+INSERT INTO ORDERS VALUES (23,'Mario Molina','888-10','Calzada Roosevelt km 14, 6-38 zona 2 de Mixco, colonia El Tesoro , Guatemala, Guatemala','1031',101,TO_DATE('24-10-2017','DD-MM-YYYY'),3.5,0.25);
+INSERT INTO ORDERS VALUES (24,'Veronica Raymundo','7770-10','1ra. Calle 7-69 Z. 9, Honduras, Tegucigalpa','1041',102,TO_DATE('10-10-2017','DD-MM-YYYY'),3.2,0.27);
+INSERT INTO ORDERS VALUES (25,'Davel Altan','1000-6660','Avenida Reforma y 3ra. Calle Zona 9 , Guatemala, Guatemala','1051',101,TO_DATE('14-10-2017','DD-MM-YYYY'),4.0,0.31);
+INSERT INTO ORDERS VALUES (26,'Ronald Calderon','5550-610','11 Calle 0-61 Zona 9, Honduras, Tegucigalpa ','1001',102,TO_DATE('15-10-2017','DD-MM-YYYY'),8.5,0.19);
+INSERT INTO ORDERS VALUES (27,'Gerardo Motti','4440-104','Kilómetro 16.5 Carretera Al Salvador Parque Automotriz , Guatemala, Guatemala','1061',102,TO_DATE('11-10-2017','DD-MM-YYYY'),6.5,0.22);
+INSERT INTO ORDERS VALUES (28,'Maria Ruedas','3330-102','Avenida Petapa 7-02 Zona 12, Honduras, Tegucigalpa ','1071',102,TO_DATE('12-10-2017','DD-MM-YYYY'),5.3,0.35);
+INSERT INTO ORDERS VALUES (29,'Glenda de Monta','2220-2','Blvd Próceres 18 Calle 10-23 Zona 10 , Guatemala, Guatemala','1081',103,TO_DATE('27-10-2017','DD-MM-YYYY'),2.2,0.40);
+
+
+-------- *** 3 *** -------------- insertar Order _ det -----------------
+INSERT INTO ORDERS_DET VALUES (1,'E-001',(select peso_total from orders where order_id = 1),(select TAMANIO_TOTAL from orders where order_id = 1),1);
+INSERT INTO ORDERS_DET VALUES (2,'E-100',(select peso_total from orders where order_id = 2),(select TAMANIO_TOTAL from orders where order_id = 2),2);
+INSERT INTO ORDERS_DET VALUES (3,'E-150',(select peso_total from orders where order_id = 3),(select TAMANIO_TOTAL from orders where order_id = 3),3);
+INSERT INTO ORDERS_DET VALUES (4,'E-200',(select peso_total from orders where order_id = 4),(select TAMANIO_TOTAL from orders where order_id = 4),4);
+INSERT INTO ORDERS_DET VALUES (5,'E-300',(select peso_total from orders where order_id = 5),(select TAMANIO_TOTAL from orders where order_id = 5),5);
+INSERT INTO ORDERS_DET VALUES (6,'E-500',(select peso_total from orders where order_id = 6),(select TAMANIO_TOTAL from orders where order_id = 6),6);
+INSERT INTO ORDERS_DET VALUES (7,'E-450',(select peso_total from orders where order_id = 7),(select TAMANIO_TOTAL from orders where order_id = 7),7);
+INSERT INTO ORDERS_DET VALUES (8,'E-320',(select peso_total from orders where order_id = 8),(select TAMANIO_TOTAL from orders where order_id = 8),8);
+INSERT INTO ORDERS_DET VALUES (9,'E-359',(select peso_total from orders where order_id = 9),(select TAMANIO_TOTAL from orders where order_id = 9),9);
+INSERT INTO ORDERS_DET VALUES (10,'E-950',(select peso_total from orders where order_id = 10),(select TAMANIO_TOTAL from orders where order_id = 10),10);
+
+INSERT INTO ORDERS_DET VALUES (11,'P-888',(select peso_total from orders where order_id = 11),(select TAMANIO_TOTAL from orders where order_id = 11),11);
+INSERT INTO ORDERS_DET VALUES (12,'P-789',(select peso_total from orders where order_id = 12),(select TAMANIO_TOTAL from orders where order_id = 12),12);
+INSERT INTO ORDERS_DET VALUES (13,'P-667',(select peso_total from orders where order_id = 13),(select TAMANIO_TOTAL from orders where order_id = 13),13);
+INSERT INTO ORDERS_DET VALUES (14,'P-354',(select peso_total from orders where order_id = 14),(select TAMANIO_TOTAL from orders where order_id = 14),14);
+INSERT INTO ORDERS_DET VALUES (15,'P-98',(select peso_total from orders where order_id = 15),(select TAMANIO_TOTAL from orders where order_id = 15),15);
+INSERT INTO ORDERS_DET VALUES (16,'P-57',(select peso_total from orders where order_id = 16),(select TAMANIO_TOTAL from orders where order_id = 16),16);
+INSERT INTO ORDERS_DET VALUES (17,'P-056',(select peso_total from orders where order_id = 17),(select TAMANIO_TOTAL from orders where order_id = 17),17);
+INSERT INTO ORDERS_DET VALUES (18,'P-15',(select peso_total from orders where order_id = 18),(select TAMANIO_TOTAL from orders where order_id = 18),18);
+INSERT INTO ORDERS_DET VALUES (19,'P-35',(select peso_total from orders where order_id = 19),(select TAMANIO_TOTAL from orders where order_id = 19),19);
+INSERT INTO ORDERS_DET VALUES (20,'P-66',(select peso_total from orders where order_id = 20),(select TAMANIO_TOTAL from orders where order_id = 20),20);
+
+INSERT INTO ORDERS_DET VALUES (21,'M-100',(select peso_total from orders where order_id = 21),(select TAMANIO_TOTAL from orders where order_id = 21),21);
+INSERT INTO ORDERS_DET VALUES (22,'M-150',(select peso_total from orders where order_id = 22),(select TAMANIO_TOTAL from orders where order_id = 22),22);
+INSERT INTO ORDERS_DET VALUES (23,'M-200',(select peso_total from orders where order_id = 23),(select TAMANIO_TOTAL from orders where order_id = 23),23);
+INSERT INTO ORDERS_DET VALUES (24,'M-300',(select peso_total from orders where order_id = 24),(select TAMANIO_TOTAL from orders where order_id = 24),24);
+INSERT INTO ORDERS_DET VALUES (25,'M-400',(select peso_total from orders where order_id = 25),(select TAMANIO_TOTAL from orders where order_id = 25),25);
+INSERT INTO ORDERS_DET VALUES (26,'M-560',(select peso_total from orders where order_id = 26),(select TAMANIO_TOTAL from orders where order_id = 26),26);
+INSERT INTO ORDERS_DET VALUES (27,'M-653',(select peso_total from orders where order_id = 27),(select TAMANIO_TOTAL from orders where order_id = 27),27);
+INSERT INTO ORDERS_DET VALUES (28,'M-456',(select peso_total from orders where order_id = 28),(select TAMANIO_TOTAL from orders where order_id = 28),28);
+INSERT INTO ORDERS_DET VALUES (29,'M-587',(select peso_total from orders where order_id = 29),(select TAMANIO_TOTAL from orders where order_id = 29),29);
+
+--- *** 4 *** STATUS TRACK ****
+INSERT INTO STATUS_TRACK VALUES(1,'ACTIVO');
+INSERT INTO STATUS_TRACK VALUES(2,'INACTIVO');
+
+---- *** 5 *** INGRESO DE TRAKING_T ********************
+INSERT INTO TRACKING_T VALUES (100,(SELECT FEC_ORDER+1 FROM orders where order_id=1),'Empleado 100','Empleado 19','Paquete Delicado',2,3);
+INSERT INTO TRACKING_T VALUES (101,(SELECT FEC_ORDER+1 FROM orders where order_id=1),'Empleado 101','Empleado 20','Paquete Delicado',2,4);
+INSERT INTO TRACKING_T VALUES (102,(SELECT FEC_ORDER+2 FROM orders where order_id=1),'Empleado 102','Empleado 25','Paquete Delicado',2,5);
+INSERT INTO TRACKING_T VALUES (103,(SELECT FEC_ORDER+3 FROM orders where order_id=1),'Empleado 103','Empleado 26','Paquete Delicado',2,6);
+INSERT INTO TRACKING_T VALUES (104,(SELECT FEC_ORDER+4 FROM orders where order_id=1),'Empleado 104','Empleado 27','Paquete Delicado',2,8);
+INSERT INTO TRACKING_T VALUES (105,(SELECT FEC_ORDER+2 FROM orders where order_id=1),'Empleado 105','Empleado 28','Paquete Delicado',2,9);
+INSERT INTO TRACKING_T VALUES (106,(SELECT FEC_ORDER+1 FROM orders where order_id=1),'Empleado 106','Empleado 30','Paquete Delicado',2,11);
+INSERT INTO TRACKING_T VALUES (107,(SELECT FEC_ORDER+3 FROM orders where order_id=1),'Empleado 107','Empleado 31','Paquete Delicado',2,13);
+INSERT INTO TRACKING_T VALUES (108,(SELECT FEC_ORDER+4 FROM orders where order_id=1),'Empleado 108','Empleado 32','Paquete Delicado',2,15);
+INSERT INTO TRACKING_T VALUES (109,(SELECT FEC_ORDER+5 FROM orders where order_id=1),'Empleado 109','Empleado 33','Paquete Delicado',2,18);
+
+INSERT INTO TRACKING_T VALUES (110,(SELECT FEC_ORDER+6 FROM orders where order_id=1),'Empleado 111','Empleado 34','Paquete Pesado',2,22);
+INSERT INTO TRACKING_T VALUES (111,(SELECT FEC_ORDER+7 FROM orders where order_id=1),'Empleado 100','Empleado 35','Paquete Pesado',2,24);
+INSERT INTO TRACKING_T VALUES (112,(SELECT FEC_ORDER+8 FROM orders where order_id=1),'Empleado 101','Empleado 36','Paquete Pesado',2,26);
+INSERT INTO TRACKING_T VALUES (113,(SELECT FEC_ORDER+7 FROM orders where order_id=1),'Empleado 102','Empleado 36','Paquete Pesado',2,27);
+INSERT INTO TRACKING_T VALUES (114,(SELECT FEC_ORDER+7 FROM orders where order_id=1),'Empleado 104','Empleado 35','Paquete Pesado',2,28);
+INSERT INTO TRACKING_T VALUES (115,(SELECT FEC_ORDER+15 FROM orders where order_id=1),'Empleado 105','Empleado 34','Paquete Pesado',1,1);
+INSERT INTO TRACKING_T VALUES (116,(SELECT FEC_ORDER+7 FROM orders where order_id=1),'Empleado 107','Empleado 33','Paquete Pesado',1,2);
+INSERT INTO TRACKING_T VALUES (117,(SELECT FEC_ORDER+4 FROM orders where order_id=1),'Empleado 111','Empleado 32','Paquete Pesado',1,7);
+INSERT INTO TRACKING_T VALUES (118,(SELECT FEC_ORDER+6 FROM orders where order_id=1),'Empleado 105','Empleado 31','Paquete Pesado',1,12);
+INSERT INTO TRACKING_T VALUES (119,(SELECT FEC_ORDER+7 FROM orders where order_id=1),'Empleado 102','Empleado 20','Paquete Pesado',1,14);
+
+INSERT INTO TRACKING_T VALUES (120,(SELECT FEC_ORDER+8 FROM orders where order_id=1),'Empleado 103','Empleado 19','Paquete VIP',1,16);
+INSERT INTO TRACKING_T VALUES (121,(SELECT FEC_ORDER+10 FROM orders where order_id=1),'Empleado 105','Empleado 20','Paquete VIP',1,17);
+INSERT INTO TRACKING_T VALUES (122,(SELECT FEC_ORDER+11 FROM orders where order_id=1),'Empleado 104','Empleado 21','Paquete VIP',1,19);
+INSERT INTO TRACKING_T VALUES (123,(SELECT FEC_ORDER+13 FROM orders where order_id=1),'Empleado 103','Empleado 22','Paquete VIP',1,21);
+INSERT INTO TRACKING_T VALUES (124,(SELECT FEC_ORDER+14 FROM orders where order_id=1),'Empleado 102','Empleado 23','Paquete VIP',1,25);
+INSERT INTO TRACKING_T VALUES (125,(SELECT FEC_ORDER+15 FROM orders where order_id=1),'Empleado 110','Empleado 42','Paquete VIP',1,23);
+INSERT INTO TRACKING_T VALUES (126,(SELECT FEC_ORDER+16 FROM orders where order_id=1),'Empleado 105','Empleado 24','Paquete VIP',1,10);
+INSERT INTO TRACKING_T VALUES (127,(SELECT FEC_ORDER+19 FROM orders where order_id=1),'Empleado 102','Empleado 35','Paquete VIP',1,20);
+INSERT INTO TRACKING_T VALUES (128,(SELECT FEC_ORDER+12 FROM orders where order_id=1),'Empleado 103','Empleado 34','Paquete VIP',1,29);
+
+
+
+
+----- **** 6 **** DATOS ENVIOS INTERNOS ******
+INSERT INTO ENVIOS_INTERNOS VALUES (700,'Mario Juarez');
+INSERT INTO ENVIOS_INTERNOS VALUES (701,'Melvin Rodriguez');
+INSERT INTO ENVIOS_INTERNOS VALUES (702,'Susana perez');
+INSERT INTO ENVIOS_INTERNOS VALUES (703,'Eliza Torres');
+INSERT INTO ENVIOS_INTERNOS VALUES (704,'Raul Llorente');
+INSERT INTO ENVIOS_INTERNOS VALUES (705,'Jaime Lopez');
+INSERT INTO ENVIOS_INTERNOS VALUES (706,'Robin Penedo');
+INSERT INTO ENVIOS_INTERNOS VALUES (707,'Carlos Campos');
+INSERT INTO ENVIOS_INTERNOS VALUES (708,'Brian Espina');
+INSERT INTO ENVIOS_INTERNOS VALUES (709,'Juan Cadena');
+
+INSERT INTO ENVIOS_INTERNOS VALUES (710,'Elvis Perezo');
+INSERT INTO ENVIOS_INTERNOS VALUES (711,'Daniel Barrios');
+INSERT INTO ENVIOS_INTERNOS VALUES (712,'Enrique Chevarria');
+INSERT INTO ENVIOS_INTERNOS VALUES (713,'Dany Carvajal');
+INSERT INTO ENVIOS_INTERNOS VALUES (714,'Samuel Etto');
+
+
+
+--- *** 7 *** INGRESO EMPRESAS_ENVIO ******
+INSERT INTO EMPRESAS_ENVIO VALUES (500,'Fedex',5.1,'Camion');
+INSERT INTO EMPRESAS_ENVIO VALUES (501,'DHL',6.1,'Barco');
+INSERT INTO EMPRESAS_ENVIO VALUES (502,'Correos Express',3.5,'avion');
+INSERT INTO EMPRESAS_ENVIO VALUES (503,'POSTMAN',4.5,'Camion');
+INSERT INTO EMPRESAS_ENVIO VALUES (555,'Fedex',4.7,'avion');
+INSERT INTO EMPRESAS_ENVIO VALUES (576,'UPS',5.0,'Barco');
+INSERT INTO EMPRESAS_ENVIO VALUES (590,'ASM',5.4,'Barco');
+INSERT INTO EMPRESAS_ENVIO VALUES (580,'GLS',5.6,'avion');
+INSERT INTO EMPRESAS_ENVIO VALUES (575,'Zeleris',4.8,'Barco');
+INSERT INTO EMPRESAS_ENVIO VALUES (574,'Tourline Express',3.5,'Camion');
+INSERT INTO EMPRESAS_ENVIO VALUES (568,'Cacesa',2.6,'Camion');
+INSERT INTO EMPRESAS_ENVIO VALUES (562,'Starpack',8.9,'Barco');
+
+
+------ ****** 8  ********* INGRESO DATOS ENVIO *********
+INSERT INTO ENVIOS VALUES (280,500,1,1,700);
+INSERT INTO ENVIOS VALUES (295,590,1,29,701);
+INSERT INTO ENVIOS VALUES (305,562,1,25,703);
+INSERT INTO ENVIOS VALUES (310,574,1,23,708);
+INSERT INTO ENVIOS VALUES (315,576,1,21,709);
+INSERT INTO ENVIOS VALUES (320,503,1,20,711);
+INSERT INTO ENVIOS VALUES (325,555,1,19,713);
+INSERT INTO ENVIOS VALUES (330,501,1,17,714);
+INSERT INTO ENVIOS VALUES (335,500,1,16,702);
+INSERT INTO ENVIOS VALUES (340,580,1,14,713);
+
+INSERT INTO ENVIOS VALUES (345,575,1,16,714);
+INSERT INTO ENVIOS VALUES (350,590,1,14,705);
+INSERT INTO ENVIOS VALUES (355,590,1,12,702);
+INSERT INTO ENVIOS VALUES (360,500,1,10,706);
+INSERT INTO ENVIOS VALUES (365,503,1,7,709);
+INSERT INTO ENVIOS VALUES (370,555,1,2,702);
+
+INSERT INTO ENVIOS VALUES (375,590,1,29,705);
+INSERT INTO ENVIOS VALUES (380,562,1,25,711);
+INSERT INTO ENVIOS VALUES (390,574,1,23,712);
+INSERT INTO ENVIOS VALUES (395,576,1,21,713);
+INSERT INTO ENVIOS VALUES (400,503,1,20,714);
+INSERT INTO ENVIOS VALUES (405,555,1,19,710);
