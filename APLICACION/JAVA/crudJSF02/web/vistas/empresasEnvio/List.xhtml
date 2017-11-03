@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListEmpresasEnvioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListEmpresasEnvioEmpty}" rendered="#{empresasEnvioController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{empresasEnvioController.items.rowCount > 0}">
+                    <h:outputText value="#{empresasEnvioController.pagination.pageFirstItem + 1}..#{empresasEnvioController.pagination.pageLastItem + 1}/#{empresasEnvioController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{empresasEnvioController.previous}" value="#{bundle.Previous} #{empresasEnvioController.pagination.pageSize}" rendered="#{empresasEnvioController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{empresasEnvioController.next}" value="#{bundle.Next} #{empresasEnvioController.pagination.pageSize}" rendered="#{empresasEnvioController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{empresasEnvioController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEmpresasEnvioTitle_idEmpresa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEmpresa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEmpresasEnvioTitle_nombreEmpresa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreEmpresa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEmpresasEnvioTitle_tarifaCobro}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tarifaCobro}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEmpresasEnvioTitle_trackAlias}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.trackAlias}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{empresasEnvioController.prepareView}" value="#{bundle.ListEmpresasEnvioViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{empresasEnvioController.prepareEdit}" value="#{bundle.ListEmpresasEnvioEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{empresasEnvioController.destroy}" value="#{bundle.ListEmpresasEnvioDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{empresasEnvioController.prepareCreate}" value="#{bundle.ListEmpresasEnvioCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListEmpresasEnvioIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

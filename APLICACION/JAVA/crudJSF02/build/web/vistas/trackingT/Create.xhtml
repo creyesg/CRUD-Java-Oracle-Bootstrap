@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTrackingTTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTrackingTLabel_trackId}" for="trackId" />
+                    <h:inputText id="trackId" value="#{trackingTController.selected.trackId}" title="#{bundle.CreateTrackingTTitle_trackId}" required="true" requiredMessage="#{bundle.CreateTrackingTRequiredMessage_trackId}"/>
+                    <h:outputLabel value="#{bundle.CreateTrackingTLabel_fecTrack}" for="fecTrack" />
+                    <h:inputText id="fecTrack" value="#{trackingTController.selected.fecTrack}" title="#{bundle.CreateTrackingTTitle_fecTrack}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTrackingTLabel_emisorAlias}" for="emisorAlias" />
+                    <h:inputText id="emisorAlias" value="#{trackingTController.selected.emisorAlias}" title="#{bundle.CreateTrackingTTitle_emisorAlias}" />
+                    <h:outputLabel value="#{bundle.CreateTrackingTLabel_reseptorAlias}" for="reseptorAlias" />
+                    <h:inputText id="reseptorAlias" value="#{trackingTController.selected.reseptorAlias}" title="#{bundle.CreateTrackingTTitle_reseptorAlias}" />
+                    <h:outputLabel value="#{bundle.CreateTrackingTLabel_txtObservaciones}" for="txtObservaciones" />
+                    <h:inputText id="txtObservaciones" value="#{trackingTController.selected.txtObservaciones}" title="#{bundle.CreateTrackingTTitle_txtObservaciones}" />
+                    <h:outputLabel value="#{bundle.CreateTrackingTLabel_coordenadas}" for="coordenadas" />
+                    <h:inputText id="coordenadas" value="#{trackingTController.selected.coordenadas}" title="#{bundle.CreateTrackingTTitle_coordenadas}" />
+                    <h:outputLabel value="#{bundle.CreateTrackingTLabel_orderId}" for="orderId" />
+                    <h:selectOneMenu id="orderId" value="#{trackingTController.selected.orderId}" title="#{bundle.CreateTrackingTTitle_orderId}" >
+                        <f:selectItems value="#{ordersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateTrackingTLabel_idStatus}" for="idStatus" />
+                    <h:selectOneMenu id="idStatus" value="#{trackingTController.selected.idStatus}" title="#{bundle.CreateTrackingTTitle_idStatus}" >
+                        <f:selectItems value="#{statusTrackController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{trackingTController.create}" value="#{bundle.CreateTrackingTSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{trackingTController.prepareList}" value="#{bundle.CreateTrackingTShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTrackingTIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

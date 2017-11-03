@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateEmpresasEnvioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateEmpresasEnvioLabel_idEmpresa}" for="idEmpresa" />
+                    <h:inputText id="idEmpresa" value="#{empresasEnvioController.selected.idEmpresa}" title="#{bundle.CreateEmpresasEnvioTitle_idEmpresa}" required="true" requiredMessage="#{bundle.CreateEmpresasEnvioRequiredMessage_idEmpresa}"/>
+                    <h:outputLabel value="#{bundle.CreateEmpresasEnvioLabel_nombreEmpresa}" for="nombreEmpresa" />
+                    <h:inputText id="nombreEmpresa" value="#{empresasEnvioController.selected.nombreEmpresa}" title="#{bundle.CreateEmpresasEnvioTitle_nombreEmpresa}" />
+                    <h:outputLabel value="#{bundle.CreateEmpresasEnvioLabel_tarifaCobro}" for="tarifaCobro" />
+                    <h:inputText id="tarifaCobro" value="#{empresasEnvioController.selected.tarifaCobro}" title="#{bundle.CreateEmpresasEnvioTitle_tarifaCobro}" />
+                    <h:outputLabel value="#{bundle.CreateEmpresasEnvioLabel_trackAlias}" for="trackAlias" />
+                    <h:inputText id="trackAlias" value="#{empresasEnvioController.selected.trackAlias}" title="#{bundle.CreateEmpresasEnvioTitle_trackAlias}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{empresasEnvioController.create}" value="#{bundle.CreateEmpresasEnvioSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{empresasEnvioController.prepareList}" value="#{bundle.CreateEmpresasEnvioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateEmpresasEnvioIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTrackingTTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTrackingTLabel_trackId}"/>
+                    <h:outputText value="#{trackingTController.selected.trackId}" title="#{bundle.ViewTrackingTTitle_trackId}"/>
+                    <h:outputText value="#{bundle.ViewTrackingTLabel_fecTrack}"/>
+                    <h:outputText value="#{trackingTController.selected.fecTrack}" title="#{bundle.ViewTrackingTTitle_fecTrack}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTrackingTLabel_emisorAlias}"/>
+                    <h:outputText value="#{trackingTController.selected.emisorAlias}" title="#{bundle.ViewTrackingTTitle_emisorAlias}"/>
+                    <h:outputText value="#{bundle.ViewTrackingTLabel_reseptorAlias}"/>
+                    <h:outputText value="#{trackingTController.selected.reseptorAlias}" title="#{bundle.ViewTrackingTTitle_reseptorAlias}"/>
+                    <h:outputText value="#{bundle.ViewTrackingTLabel_txtObservaciones}"/>
+                    <h:outputText value="#{trackingTController.selected.txtObservaciones}" title="#{bundle.ViewTrackingTTitle_txtObservaciones}"/>
+                    <h:outputText value="#{bundle.ViewTrackingTLabel_coordenadas}"/>
+                    <h:outputText value="#{trackingTController.selected.coordenadas}" title="#{bundle.ViewTrackingTTitle_coordenadas}"/>
+                    <h:outputText value="#{bundle.ViewTrackingTLabel_orderId}"/>
+                    <h:outputText value="#{trackingTController.selected.orderId}" title="#{bundle.ViewTrackingTTitle_orderId}"/>
+                    <h:outputText value="#{bundle.ViewTrackingTLabel_idStatus}"/>
+                    <h:outputText value="#{trackingTController.selected.idStatus}" title="#{bundle.ViewTrackingTTitle_idStatus}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{trackingTController.destroyAndView}" value="#{bundle.ViewTrackingTDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTrackingTEditLink}"/>
+                <br />
+                <h:commandLink action="#{trackingTController.prepareCreate}" value="#{bundle.ViewTrackingTCreateLink}" />
+                <br />
+                <h:commandLink action="#{trackingTController.prepareList}" value="#{bundle.ViewTrackingTShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewTrackingTIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

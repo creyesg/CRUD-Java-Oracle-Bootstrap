@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewOrdersDetTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewOrdersDetLabel_detId}"/>
+                    <h:outputText value="#{ordersDetController.selected.detId}" title="#{bundle.ViewOrdersDetTitle_detId}"/>
+                    <h:outputText value="#{bundle.ViewOrdersDetLabel_codProducto}"/>
+                    <h:outputText value="#{ordersDetController.selected.codProducto}" title="#{bundle.ViewOrdersDetTitle_codProducto}"/>
+                    <h:outputText value="#{bundle.ViewOrdersDetLabel_peso}"/>
+                    <h:outputText value="#{ordersDetController.selected.peso}" title="#{bundle.ViewOrdersDetTitle_peso}"/>
+                    <h:outputText value="#{bundle.ViewOrdersDetLabel_tamaño}"/>
+                    <h:outputText value="#{ordersDetController.selected.tamaño}" title="#{bundle.ViewOrdersDetTitle_tamaño}"/>
+                    <h:outputText value="#{bundle.ViewOrdersDetLabel_orderId}"/>
+                    <h:outputText value="#{ordersDetController.selected.orderId}" title="#{bundle.ViewOrdersDetTitle_orderId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{ordersDetController.destroyAndView}" value="#{bundle.ViewOrdersDetDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewOrdersDetEditLink}"/>
+                <br />
+                <h:commandLink action="#{ordersDetController.prepareCreate}" value="#{bundle.ViewOrdersDetCreateLink}" />
+                <br />
+                <h:commandLink action="#{ordersDetController.prepareList}" value="#{bundle.ViewOrdersDetShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewOrdersDetIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

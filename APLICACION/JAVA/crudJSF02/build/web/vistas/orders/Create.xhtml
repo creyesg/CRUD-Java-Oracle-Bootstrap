@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateOrdersTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_orderId}" for="orderId" />
+                    <h:inputText id="orderId" value="#{ordersController.selected.orderId}" title="#{bundle.CreateOrdersTitle_orderId}" required="true" requiredMessage="#{bundle.CreateOrdersRequiredMessage_orderId}"/>
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_nombreFactura}" for="nombreFactura" />
+                    <h:inputText id="nombreFactura" value="#{ordersController.selected.nombreFactura}" title="#{bundle.CreateOrdersTitle_nombreFactura}" />
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_nit}" for="nit" />
+                    <h:inputText id="nit" value="#{ordersController.selected.nit}" title="#{bundle.CreateOrdersTitle_nit}" />
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_direccion}" for="direccion" />
+                    <h:inputText id="direccion" value="#{ordersController.selected.direccion}" title="#{bundle.CreateOrdersTitle_direccion}" />
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_clientId}" for="clientId" />
+                    <h:inputText id="clientId" value="#{ordersController.selected.clientId}" title="#{bundle.CreateOrdersTitle_clientId}" />
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_fecOrder}" for="fecOrder" />
+                    <h:inputText id="fecOrder" value="#{ordersController.selected.fecOrder}" title="#{bundle.CreateOrdersTitle_fecOrder}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_pesoTotal}" for="pesoTotal" />
+                    <h:inputText id="pesoTotal" value="#{ordersController.selected.pesoTotal}" title="#{bundle.CreateOrdersTitle_pesoTotal}" />
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_tamanioTotal}" for="tamanioTotal" />
+                    <h:inputText id="tamanioTotal" value="#{ordersController.selected.tamanioTotal}" title="#{bundle.CreateOrdersTitle_tamanioTotal}" />
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_idStatus}" for="idStatus" />
+                    <h:selectOneMenu id="idStatus" value="#{ordersController.selected.idStatus}" title="#{bundle.CreateOrdersTitle_idStatus}" >
+                        <f:selectItems value="#{statusOrderController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{ordersController.create}" value="#{bundle.CreateOrdersSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{ordersController.prepareList}" value="#{bundle.CreateOrdersShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateOrdersIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

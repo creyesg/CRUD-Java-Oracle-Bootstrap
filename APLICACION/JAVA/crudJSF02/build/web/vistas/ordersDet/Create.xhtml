@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateOrdersDetTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateOrdersDetLabel_detId}" for="detId" />
+                    <h:inputText id="detId" value="#{ordersDetController.selected.detId}" title="#{bundle.CreateOrdersDetTitle_detId}" required="true" requiredMessage="#{bundle.CreateOrdersDetRequiredMessage_detId}"/>
+                    <h:outputLabel value="#{bundle.CreateOrdersDetLabel_codProducto}" for="codProducto" />
+                    <h:inputText id="codProducto" value="#{ordersDetController.selected.codProducto}" title="#{bundle.CreateOrdersDetTitle_codProducto}" />
+                    <h:outputLabel value="#{bundle.CreateOrdersDetLabel_peso}" for="peso" />
+                    <h:inputText id="peso" value="#{ordersDetController.selected.peso}" title="#{bundle.CreateOrdersDetTitle_peso}" />
+                    <h:outputLabel value="#{bundle.CreateOrdersDetLabel_tamaño}" for="tamaño" />
+                    <h:inputText id="tamaño" value="#{ordersDetController.selected.tamaño}" title="#{bundle.CreateOrdersDetTitle_tamaño}" />
+                    <h:outputLabel value="#{bundle.CreateOrdersDetLabel_orderId}" for="orderId" />
+                    <h:selectOneMenu id="orderId" value="#{ordersDetController.selected.orderId}" title="#{bundle.CreateOrdersDetTitle_orderId}" >
+                        <f:selectItems value="#{ordersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{ordersDetController.create}" value="#{bundle.CreateOrdersDetSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{ordersDetController.prepareList}" value="#{bundle.CreateOrdersDetShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateOrdersDetIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

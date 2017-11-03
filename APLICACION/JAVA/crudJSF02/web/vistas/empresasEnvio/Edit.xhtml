@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditEmpresasEnvioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditEmpresasEnvioLabel_idEmpresa}" for="idEmpresa" />
+                    <h:inputText id="idEmpresa" value="#{empresasEnvioController.selected.idEmpresa}" title="#{bundle.EditEmpresasEnvioTitle_idEmpresa}" required="true" requiredMessage="#{bundle.EditEmpresasEnvioRequiredMessage_idEmpresa}"/>
+                    <h:outputLabel value="#{bundle.EditEmpresasEnvioLabel_nombreEmpresa}" for="nombreEmpresa" />
+                    <h:inputText id="nombreEmpresa" value="#{empresasEnvioController.selected.nombreEmpresa}" title="#{bundle.EditEmpresasEnvioTitle_nombreEmpresa}" />
+                    <h:outputLabel value="#{bundle.EditEmpresasEnvioLabel_tarifaCobro}" for="tarifaCobro" />
+                    <h:inputText id="tarifaCobro" value="#{empresasEnvioController.selected.tarifaCobro}" title="#{bundle.EditEmpresasEnvioTitle_tarifaCobro}" />
+                    <h:outputLabel value="#{bundle.EditEmpresasEnvioLabel_trackAlias}" for="trackAlias" />
+                    <h:inputText id="trackAlias" value="#{empresasEnvioController.selected.trackAlias}" title="#{bundle.EditEmpresasEnvioTitle_trackAlias}" />
+                </h:panelGrid>
+                <h:commandLink action="#{empresasEnvioController.update}" value="#{bundle.EditEmpresasEnvioSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditEmpresasEnvioViewLink}"/>
+                <br />
+                <h:commandLink action="#{empresasEnvioController.prepareList}" value="#{bundle.EditEmpresasEnvioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditEmpresasEnvioIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
